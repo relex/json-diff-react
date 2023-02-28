@@ -109,8 +109,10 @@ export const colorize = function (diff, options = {}, customization) {
     }
 
     let renderedLine = (
-      <span className={className}
-         style={style}
+      <span 
+        className={className}
+        style={style}
+        key={output.length}
       >{line + "\r\n"}
       </span>
     );

@@ -58,25 +58,25 @@ function App() {
   }
 
   return (
-    <body>
-        <div className="App">
-        <table>
-          <tr>
-            <th>
-              <Editor value={original} callback={onChangeOriginal} />
-            </th>
-            <th>
-              <Editor value={latest} callback={onChangeLatest} />
-            </th>
-          </tr>
-        </table>
-        <JsonDiffComponent 
-          original={original} 
-          latest={latest} 
-          onError={onError}
-          />
-      </div>
-    </body>
+    <div className="App">
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <Editor value={original} callback={onChangeOriginal} />
+          </td>
+          <td>
+            <Editor value={latest} callback={onChangeLatest} />
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <JsonDiffComponent 
+        original={original} 
+        latest={latest} 
+        onError={onError}
+        />
+    </div>
   );
 }
 
