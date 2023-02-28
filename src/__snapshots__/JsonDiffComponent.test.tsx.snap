@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<JsonDiffComponent /> should return an empty div if there are no changes 1`] = `
+<div>
+  <div>
+    <pre />
+  </div>
+</div>
+`;
