@@ -3,7 +3,8 @@
 ![Example of the React component](example.png)
 
 A react component that renders a structural diff of two JSON values. Written
-in TypeScript. Types are declared for all user facing functions.
+in TypeScript except for the JavaScript code inherited from `json-diff`. 
+Types are declared for all user facing functionality.
 
 This is a fork of [https://github.com/andreyvit/json-diff] with all of the
 dependencies towards `node.js` core modules removed. Code from `json-diff` can
