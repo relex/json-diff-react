@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+# json-diff-react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![example.png](Example of the React component)
 
-## Available Scripts
+A react component that renders a structural diff of two JSON values. Written
+in TypeScript. Types are declared for all user facing functions.
 
-In the project directory, you can run:
+This is a fork of [https://github.com/andreyvit/json-diff] with all of the
+dependencies towards `node.js` core modules removed. Code from `json-diff` can
+be found under `src/JsonDiff/Internal` and it's mostly unchanged - expect for
+the `colorize` module.
 
-### `npm start`
+## Customization
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The `<JsonDiffComponent />` requires 4 input properties:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. `original`: original string of JSON text
+   - If the text can't be parsed as JSON, an error is rendered.
+2. `latest`: new string of JSON text that is compared to `original`
+   - If the text can't be parsed as JSON, an error is rendered.
+3. `onError`: callback function that is called if an error occurs
+   - Mostly used to handle situations where `original` or `latest` cannot be
+     parsed as JSON
+   - Use this to render the error in any way you want.
+3. `styleCustomization`: CSS customization of the markup
+4. `jsonDiffOptions`: options that are fed directly to `json-diff`
 
-### `npm test`
+### Style customization
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+There are two ways to customize the look of the component:
 
-### `npm run build`
+1. via a `CSS` file
+2. via `styleCustomization` property of `<JsonDiffComponent />`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### CSS
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Import a CSS file that defines the following classes to your `.tsx` file:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+``` scss 
+.deletion {
+  /* customization for deleted lines (span) */
+}
 
-### `npm run eject`
+.addition {
+  /* customization for added lines (span) */
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+.unchanged {
+  /* customization for unchanged lines (span) */
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+.diff {
+  /* customization for the <div> that contains the diff
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The names of the classes can be customized via `styleCustomization`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### styleCustomization
 
-## Learn More
+You can also use the `styleCustomization` property to customize how the
+component looks and rename the CSS classes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+``` typescript 
+export type StyleCustomization = {
+  additionLineStyle: CSS.Properties,
+  additionClassName: string,
+  deletionLineStyle: CSS.Properties,
+  deletionClassName: string,
+  unchangedLineStyle: CSS.Properties,
+  unchangedClassName: string,
+  frameStyle: CSS.Properties,
+  frameClassName: string
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Explanation of each customization option:
 
-### Code Splitting
+* `additionLineStyle`: `style` attribute of the HTML `<span>` element that is
+  used to render additions in the diff
+  * Defaults to `{ color: "green", "lineHeight": 0.5 }` if not specified
+* `additionClassName`: `className` attribute of the HTML `<span>` element that
+  is used to render additions in the diff
+  * Defaults to `addition` if not specified
+* `deletionLineStyle`: `style` attribute of the HTML `<span>` element that is
+  used to render deletions in the diff
+  * Defaults to `{ color: "red", "lineHeight": 0.5 }` if not specified
+* `deletionClassName`: `className` attribute of the HTML `<span>` element that
+  is used to render deletions in the diff
+  * Defaults to `deletion` if not specified
+* `unchangedLineStyle`: `style` attribute of the HTML `<span>` element that is
+  used to render unchanged lines in the diff
+  * Defaults to `{ "lineHeight": 0.5 }` if not specified
+* `unchangedClassName`: `className` attribute of the HTML `<span>` element that
+  is used to render unchanged lines in the diff
+  * Defaults to `unchanged` if not specified
+* `frameStyle`: `style` attribute of the HTML `<div>` element that contains the
+  rendered diff
+  * Can be used to customize background, etc.
+  * Defaults to no customizations if not specified.
+* `frameClassName`: `className` attribute of the HTML `<div>` element that
+  contains the rendered diff 
+  * Defaults to `diff`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### Options fed to json-diff
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can pass options to the underlying `json-diff` functions via
+`jsonDiffOptions` which has the following type:
 
-### Making a Progressive Web App
+``` typescript 
+export type JsonDiffOptions = {
+  maxElisions?: number,
+  precision?: number,
+  outputKeys?: string[],
+  excludeKeys?: string[],
+  full?: boolean,
+  sort?: boolean,
+  keysOnly?: boolean,
+  keepUnchangedValues?: boolean,
+  outputNewOnly?: boolean,
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All of the fields are optional. Consult the original `json-diff` library to
+learn more about how the options affect the output.

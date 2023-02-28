@@ -53,6 +53,10 @@ function App() {
     setLatest(e.target.value);
   }
 
+  const onError = (e: Error): JSX.Element => {
+    return <p>{e.message}</p>;
+  }
+
   return (
     <body>
         <div className="App">
@@ -66,7 +70,11 @@ function App() {
             </th>
           </tr>
         </table>
-        <JsonDiffComponent original={original} latest={latest} styleCustomization={{}} jsonDiffOptions={{}} />
+        <JsonDiffComponent 
+          original={original} 
+          latest={latest} 
+          onError={onError}
+          />
       </div>
     </body>
   );

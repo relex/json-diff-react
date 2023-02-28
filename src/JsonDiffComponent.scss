@@ -1,11 +1,15 @@
 .deletion {
-  /* customization for deleted lines */
+  /* customization for deleted lines (span) */
 }
 
 .addition {
-  /* customization for added lines */
+  /* customization for added lines (span) */
 }
 
 .unchanged {
-  /* customization for unchanged lines */
+  /* customization for unchanged lines (span) */
+}
+
+.diff {
+  /* customization for the <div> that contains the diff
 }

@@ -25,7 +25,9 @@ export type StyleCustomization = {
   deletionLineStyle: CSS.Properties,
   deletionClassName: string,
   unchangedLineStyle: CSS.Properties,
-  unchangedClassName: string
+  unchangedClassName: string,
+  frameStyle: CSS.Properties,
+  frameClassName: string
 }
 
 export function diff (obj1: object, obj2: object, options: JsonDiffOptions = {}) {

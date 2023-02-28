@@ -111,7 +111,7 @@ export const colorize = function (diff, options = {}, customization) {
     let renderedLine = (
       <span className={className}
          style={style}
-      >{line}
+      >{line + "\r\n"}
       </span>
     );
     
@@ -119,7 +119,7 @@ export const colorize = function (diff, options = {}, customization) {
   });
 
   return (
-    <div>
+    <div className={customization.frameClassName} style={customization.frameStyle}>
       <pre>
       {output}
       </pre>

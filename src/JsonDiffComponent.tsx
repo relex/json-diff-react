@@ -1,5 +1,5 @@
 import { diffString, JsonDiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
-import 'react';
+import React from 'react';
 
 const defaultStyleCustomization: StyleCustomization = {
   additionLineStyle: { 
@@ -15,7 +15,9 @@ const defaultStyleCustomization: StyleCustomization = {
   unchangedLineStyle: {
     lineHeight: 0.5
   },
-  unchangedClassName: "unchanged"
+  unchangedClassName: "unchanged",
+  frameStyle: {},
+  frameClassName: "diff"
 }
 
 export function mkCustomization(customizations: Partial<StyleCustomization>): StyleCustomization {
@@ -25,31 +27,37 @@ export function mkCustomization(customizations: Partial<StyleCustomization>): St
 export function JsonDiffComponent
   ({ original, 
      latest, 
-     styleCustomization, 
-     jsonDiffOptions
+     onError,
+     styleCustomization = {}, 
+     jsonDiffOptions = {}
   }: { 
      original: string, 
      latest: string, 
+     onError: (e: Error) => JSX.Element,
      styleCustomization?: Partial<StyleCustomization>,
      jsonDiffOptions?: JsonDiffOptions
   }): JSX.Element {
 
-  let parsedOriginal = JSON.parse(original);
-  let parsedLatest = JSON.parse(latest);
-
   let actualCustomization = styleCustomization ?? {};
   let fullCustomization = mkCustomization(actualCustomization);
 
-  let diffElement = diffString(
-    parsedOriginal, 
-    parsedLatest, 
-    jsonDiffOptions,
-    fullCustomization
-  );
+  try {
+    let parsedOriginal = JSON.parse(original);
+    let parsedLatest = JSON.parse(latest);
 
-  return (
-    <div>
-      {diffElement}
-    </div>
-  );
+    let diffElement = diffString(
+      parsedOriginal, 
+      parsedLatest, 
+      jsonDiffOptions,
+      fullCustomization
+    );
+
+    return (
+      <div>
+        {diffElement}
+      </div>
+    );
+  } catch(e: any) {
+    return onError(new Error(e.toString())); 
+  }
 }
