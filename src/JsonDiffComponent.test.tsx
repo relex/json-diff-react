@@ -26,8 +26,17 @@ describe('<JsonDiffComponent />', () => {
           .create(<JsonDiffComponent original={json} latest={json} onError={onError} />)
           .toJSON();
 
-        expect(tree).toMatchSnapshot();
         expect(onError).not.toHaveBeenCalled();
+        expect(tree).toMatchInlineSnapshot(`
+          <div>
+            <div
+              className="diff"
+              style={{}}
+            >
+              <pre />
+            </div>
+          </div>
+        `);
       })
     );
   });
