@@ -1,6 +1,6 @@
 # json-diff-react
 
-![example.png](Example of the React component)
+![Example of the React component](example.png)
 
 A react component that renders a structural diff of two JSON values. Written
 in TypeScript. Types are declared for all user facing functions.
