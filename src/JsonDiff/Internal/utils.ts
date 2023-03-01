@@ -1,3 +1,6 @@
+// This is copied from 'json-diff' package ('lib/index.js') with minor
+// modifications.
+
 export const extendedTypeOf = function (obj: object): string {
   const result = typeof obj
   if (obj == null) {

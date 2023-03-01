@@ -1,3 +1,8 @@
+// Copied from 'json-diff' with minor modifications. 
+//
+// The 'colorize' function was adapted from console rendering to browser 
+// rendering - it now returns a JSX.Element.
+
 import { extendedTypeOf } from './utils';
 import React from 'react';
 

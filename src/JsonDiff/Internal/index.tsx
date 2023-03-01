@@ -1,3 +1,8 @@
+// This is a new module that exposes the public API of the modified 'json-diff'
+// modules.
+//
+// Exports types.
+
 import { roundObj } from './utils';
 
 // @ts-ignore

@@ -1,3 +1,6 @@
+// This is copied from 'json-diff' package ('lib/index.js') with minor
+// modifications.
+
 import { extendedTypeOf } from './utils';
 import { SequenceMatcher } from '@ewoudenberg/difflib';
 
