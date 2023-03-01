@@ -1,4 +1,4 @@
-import { diffString, JsonDiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
+import { diffRender, DiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
 import React from 'react';
 
 const defaultStyleCustomization: StyleCustomization = {
@@ -35,7 +35,7 @@ export function JsonDiffComponent
      latest: string, 
      onError: (e: Error) => JSX.Element,
      styleCustomization?: Partial<StyleCustomization>,
-     jsonDiffOptions?: JsonDiffOptions
+     jsonDiffOptions?: DiffOptions
   }): JSX.Element {
 
   let actualCustomization = styleCustomization ?? {};
@@ -45,7 +45,7 @@ export function JsonDiffComponent
     let parsedOriginal = JSON.parse(original);
     let parsedLatest = JSON.parse(latest);
 
-    let diffElement = diffString(
+    let diffElement = diffRender(
       parsedOriginal, 
       parsedLatest, 
       jsonDiffOptions,
@@ -61,3 +61,6 @@ export function JsonDiffComponent
     return onError(new Error(e.toString())); 
   }
 }
+
+// Re-export 'StyleCustomization' and 'DiffOptions'
+export type { StyleCustomization, DiffOptions } from './JsonDiff/Internal/index';

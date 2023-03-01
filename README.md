@@ -9,7 +9,7 @@ Types are declared for all user facing functionality.
 This is a fork of https://github.com/andreyvit/json-diff with all of the
 dependencies towards `node.js` core modules removed. Code from `json-diff` can
 be found under `src/JsonDiff/Internal` and it's mostly unchanged - expect for
-the `colorize` module.
+the `colorize` module which now returns a JSX element instead of a string.
 
 Look into the `example` directory to find an example application that uses this
 component.
@@ -113,18 +113,21 @@ You can pass options to the underlying `json-diff` functions via
 `jsonDiffOptions` which has the following type:
 
 ``` typescript 
-export type JsonDiffOptions = {
-  maxElisions?: number,
-  precision?: number,
-  outputKeys?: string[],
-  excludeKeys?: string[],
-  full?: boolean,
-  sort?: boolean,
-  keysOnly?: boolean,
-  keepUnchangedValues?: boolean,
-  outputNewOnly?: boolean,
-};
+export interface DiffOptions {
+    verbose?: boolean;
+    raw?: boolean;
+    keysOnly?: boolean;
+    full?: boolean;
+    sort?: boolean;
+    outputKeys?: string[];
+    keepUnchangedValues?: boolean;
+    outputNewOnly?: boolean;
+    maxElisions?: number;
+    precision?: number;
+}
 ```
 
 All of the fields are optional. Consult the original `json-diff` library to
 learn more about how the options affect the output.
+
+This type came from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/index.d.ts.

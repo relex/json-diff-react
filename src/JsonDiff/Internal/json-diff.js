@@ -1,6 +1,5 @@
 import { extendedTypeOf } from './utils';
-
-const { SequenceMatcher } = require('@ewoudenberg/difflib')
+import { SequenceMatcher } from '@ewoudenberg/difflib';
 
 export default class JsonDiff {
   constructor (options) {

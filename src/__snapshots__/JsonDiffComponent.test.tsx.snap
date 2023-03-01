@@ -1,6 +1,653 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<JsonDiffComponent /> should return an empty div if there are no changes 1`] = `
+exports[`<JsonDiffComponent /> it should render correctly (array vs array) 1`] = `
+<div>
+  <div
+    className="diff"
+    style={{}}
+  >
+    <pre>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        [
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          ...
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          ...
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          ...
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          4
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        ]
+
+      </span>
+    </pre>
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> it should render correctly (object vs array) 1`] = `
+<div>
+  <div
+    className="diff"
+    style={{}}
+  >
+    <pre>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        {
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key1: "value1"
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key2: 123
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key3: [
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            1
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            2
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            3
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          ]
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        }
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        [
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          1
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          2
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          3
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          4
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        ]
+
+      </span>
+    </pre>
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> it should render correctly (objects vs object) 1`] = `
+<div>
+  <div
+    className="diff"
+    style={{}}
+  >
+    <pre>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        {
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key1: "value1"
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key1: "value"
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key3: [
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            4
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          ]
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        }
+
+      </span>
+    </pre>
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> should pick up CSS classes from styleCustomization 1`] = `
+<div>
+  <div
+    className="custom_frame_class"
+    style={{}}
+  >
+    <pre>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        {
+
+      </span>
+      <span
+        className="custom_deletion_class"
+        style={
+          {
+            "color": "red",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key1: "value1"
+
+      </span>
+      <span
+        className="custom_addition_class"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key1: "value"
+
+      </span>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          key3: [
+
+      </span>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="custom_addition_class"
+        style={
+          {
+            "color": "green",
+            "lineHeight": 0.5,
+          }
+        }
+      >
+            4
+
+      </span>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+          ]
+
+      </span>
+      <span
+        className="custom_unchanged_class"
+        style={
+          {
+            "lineHeight": 0.5,
+          }
+        }
+      >
+        }
+
+      </span>
+    </pre>
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization 1`] = `
+<div>
+  <div
+    className="diff"
+    style={
+      {
+        "backgroundColor": "black",
+      }
+    }
+  >
+    <pre>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+        {
+
+      </span>
+      <span
+        className="deletion"
+        style={
+          {
+            "lineHeight": 2,
+          }
+        }
+      >
+          key1: "value1"
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "lineHeight": 1,
+          }
+        }
+      >
+          key1: "value"
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+          key3: [
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+            ...
+
+      </span>
+      <span
+        className="addition"
+        style={
+          {
+            "lineHeight": 1,
+          }
+        }
+      >
+            4
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+          ]
+
+      </span>
+      <span
+        className="unchanged"
+        style={
+          {
+            "lineHeight": 3,
+          }
+        }
+      >
+        }
+
+      </span>
+    </pre>
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> should return an empty div if there are no changes (snapshot) 1`] = `
 <div>
   <div
     className="diff"

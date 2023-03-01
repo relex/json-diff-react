@@ -1,7 +1,8 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-  roots: ["src"]
+  roots: ["src"],
+  testEnvironment: "jsdom"
 };
 
 export default config;

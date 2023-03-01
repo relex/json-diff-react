@@ -1,7 +1,6 @@
 import { extendedTypeOf } from './utils';
 import React from 'react';
 
-
 const subcolorizeToCallback = function (options, key, diff, output, color, indent) {
   let subvalue
   const prefix = key ? `${key}: ` : ''
