@@ -2,7 +2,7 @@
   "name": "json-diff-react",
   "version": "0.1.0",
   "author": "Joonas Laukka <joonas.laukka@relexsolutions.com>",
-  "description": "A react.js component based on the json-diff package",
+  "description": "A React.js component based on the json-diff package",
   "private": true,
   "license": "MIT",
   "main": "src/JsonDiffComponent.tsx",
