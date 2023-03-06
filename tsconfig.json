@@ -15,11 +15,14 @@
     "esModuleInterop": true,
 
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    "allowJs": true
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/**/*.jsx"
   ]
 }
