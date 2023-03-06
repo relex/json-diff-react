@@ -7,25 +7,25 @@ import React from 'react';
 import { JsonDiffComponent, StyleCustomization } from './JsonDiffComponent';
 
 const runSnapshotTest = (
-  original: string, 
-  latest: string, 
-  onError: (e: Error) => JSX.Element, 
+  original: string,
+  latest: string,
+  onError: (e: Error) => JSX.Element,
   styleCustomization: Partial<StyleCustomization>
-  ) => {
-
+) => {
   const tree = renderer
     .create(
-      <JsonDiffComponent 
-        original={original} 
-        latest={latest} 
-        onError={onError} 
+      <JsonDiffComponent
+        original={original}
+        latest={latest}
+        onError={onError}
         styleCustomization={styleCustomization}
-        />)
+      />
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
   expect(onError).not.toHaveBeenCalled();
-}; 
+};
 
 const runSimpleSnapshotTest = (original: string, latest: string) => {
   runSnapshotTest(original, latest, jest.fn(), {});
@@ -34,78 +34,78 @@ const runSimpleSnapshotTest = (original: string, latest: string) => {
 describe('<JsonDiffComponent />', () => {
   it('it should render correctly (objects vs object)', () => {
     const original = {
-      key1: "value1",
+      key1: 'value1',
       key2: 123,
-      key3: [1, 2, 3]
+      key3: [1, 2, 3],
     };
 
     const latest = {
-      key1: "value",
+      key1: 'value',
       key2: 123,
-      key3: [1, 2, 3, 4]
+      key3: [1, 2, 3, 4],
     };
-    
+
     runSimpleSnapshotTest(JSON.stringify(original), JSON.stringify(latest));
   });
 
   it('it should render correctly (array vs array)', () => {
     const original = [1, 2, 3];
     const latest = [1, 2, 3, 4];
-    
+
     runSimpleSnapshotTest(JSON.stringify(original), JSON.stringify(latest));
   });
 
   it('it should render correctly (object vs array)', () => {
     const original = {
-      key1: "value1",
+      key1: 'value1',
       key2: 123,
-      key3: [1, 2, 3]
+      key3: [1, 2, 3],
     };
     const latest = [1, 2, 3, 4];
-    
+
     runSimpleSnapshotTest(JSON.stringify(original), JSON.stringify(latest));
   });
 
   it('should pick up CSS classes from styleCustomization', () => {
-    const original = { key1: "value1", key2: 123, key3: [1, 2, 3] };
-    const latest = { key1: "value", key2: 123, key3: [1, 2, 3, 4] };
+    const original = { key1: 'value1', key2: 123, key3: [1, 2, 3] };
+    const latest = { key1: 'value', key2: 123, key3: [1, 2, 3, 4] };
 
     const styleCustomization: Partial<StyleCustomization> = {
-      additionClassName: "custom_addition_class",
-      deletionClassName: "custom_deletion_class",
-      unchangedClassName: "custom_unchanged_class",
-      frameClassName: "custom_frame_class"
-    }
+      additionClassName: 'custom_addition_class',
+      deletionClassName: 'custom_deletion_class',
+      unchangedClassName: 'custom_unchanged_class',
+      frameClassName: 'custom_frame_class',
+    };
 
     runSnapshotTest(
       JSON.stringify(original),
       JSON.stringify(latest),
       jest.fn(),
-      styleCustomization 
+      styleCustomization
     );
   });
 
   it('should pick up CSS styles from styleCustomization', () => {
-    const original = { key1: "value1", key2: 123, key3: [1, 2, 3] };
-    const latest = { key1: "value", key2: 123, key3: [1, 2, 3, 4] };
+    const original = { key1: 'value1', key2: 123, key3: [1, 2, 3] };
+    const latest = { key1: 'value', key2: 123, key3: [1, 2, 3, 4] };
 
     const styleCustomization: Partial<StyleCustomization> = {
       additionLineStyle: { lineHeight: 1 },
       deletionLineStyle: { lineHeight: 2 },
       unchangedLineStyle: { lineHeight: 3 },
-      frameStyle: { backgroundColor: "black" }
-    }
+      frameStyle: { backgroundColor: 'black' },
+    };
 
     runSnapshotTest(
       JSON.stringify(original),
       JSON.stringify(latest),
       jest.fn(),
-      styleCustomization 
+      styleCustomization
     );
   });
 
   it('should return an empty div if there are no changes (snapshot)', () => {
-    runSimpleSnapshotTest("{}", "{}");
+    runSimpleSnapshotTest('{}', '{}');
   });
 
   it('should return an empty div if there are no changes (property)', () => {
@@ -148,7 +148,7 @@ describe('<JsonDiffComponent />', () => {
     function isValidJSON(str: string): boolean {
       try {
         JSON.parse(str);
-      } catch(e) {
+      } catch (e) {
         return false;
       }
 
@@ -157,7 +157,7 @@ describe('<JsonDiffComponent />', () => {
 
     fc.assert(
       fc.property(fc.string(), fc.string(), (original, latest) => {
-        fc.pre(!isValidJSON(original) || isValidJSON(latest)); 
+        fc.pre(!isValidJSON(original) || isValidJSON(latest));
 
         const onError = jest.fn();
         renderer
@@ -168,6 +168,4 @@ describe('<JsonDiffComponent />', () => {
       })
     );
   });
-
 });
-

@@ -5,254 +5,244 @@ import { extendedTypeOf } from './utils';
 import { SequenceMatcher } from '@ewoudenberg/difflib';
 
 export default class JsonDiff {
-  constructor (options) {
-    options.outputKeys = options.outputKeys || []
-    options.excludeKeys = options.excludeKeys || []
-    this.options = options
+  constructor(options) {
+    options.outputKeys = options.outputKeys || [];
+    options.excludeKeys = options.excludeKeys || [];
+    this.options = options;
   }
 
-  isScalar (obj) {
-    return typeof obj !== 'object' || obj === null
+  isScalar(obj) {
+    return typeof obj !== 'object' || obj === null;
   }
 
-  objectDiff (obj1, obj2) {
-    let result = {}
-    let score = 0
-    let equal = true
+  objectDiff(obj1, obj2) {
+    let result = {};
+    let score = 0;
+    let equal = true;
 
     for (const [key, value] of Object.entries(obj1)) {
       if (!this.options.outputNewOnly) {
-        const postfix = '__deleted'
+        const postfix = '__deleted';
 
-        if (!(key in obj2) && !(this.options.excludeKeys.includes(key))) {
-          result[`${key}${postfix}`] = value
-          score -= 30
-          equal = false
+        if (!(key in obj2) && !this.options.excludeKeys.includes(key)) {
+          result[`${key}${postfix}`] = value;
+          score -= 30;
+          equal = false;
         }
       }
     }
 
     for (const [key, value] of Object.entries(obj2)) {
-      const postfix = !this.options.outputNewOnly ? '__added' : ''
+      const postfix = !this.options.outputNewOnly ? '__added' : '';
 
-      if (!(key in obj1) && !(this.options.excludeKeys.includes(key))) {
-        result[`${key}${postfix}`] = value
-        score -= 30
-        equal = false
+      if (!(key in obj1) && !this.options.excludeKeys.includes(key)) {
+        result[`${key}${postfix}`] = value;
+        score -= 30;
+        equal = false;
       }
     }
 
     for (const [key, value1] of Object.entries(obj1)) {
       if (key in obj2) {
         if (this.options.excludeKeys.includes(key)) {
-          continue
+          continue;
         }
-        score += 20
-        const value2 = obj2[key]
-        const change = this.diff(value1, value2)
+        score += 20;
+        const value2 = obj2[key];
+        const change = this.diff(value1, value2);
         if (!change.equal) {
-          result[key] = change.result
-          equal = false
+          result[key] = change.result;
+          equal = false;
         } else if (this.options.full || this.options.outputKeys.includes(key)) {
-          result[key] = value1
+          result[key] = value1;
         }
         // console.log(`key ${key} change.score=${change.score} ${change.result}`)
-        score += Math.min(20, Math.max(-10, change.score / 5)) // BATMAN!
+        score += Math.min(20, Math.max(-10, change.score / 5)); // BATMAN!
       }
     }
 
     if (equal) {
-      score = 100 * Math.max(Object.keys(obj1).length, 0.5)
+      score = 100 * Math.max(Object.keys(obj1).length, 0.5);
       if (!this.options.full) {
-        result = undefined
+        result = undefined;
       }
     } else {
-      score = Math.max(0, score)
+      score = Math.max(0, score);
     }
 
     // console.log(`objectDiff(${JSON.stringify(obj1, null, 2)} <=> ${JSON.stringify(obj2, null, 2)}) == ${JSON.stringify({score, result, equal})}`)
-    return { score, result, equal }
+    return { score, result, equal };
   }
 
-  findMatchingObject (item, index, fuzzyOriginals) {
+  findMatchingObject(item, index, fuzzyOriginals) {
     // console.log("findMatchingObject: " + JSON.stringify({item, fuzzyOriginals}, null, 2))
-    let bestMatch = null
+    let bestMatch = null;
 
     for (const [key, { item: candidate, index: matchIndex }] of Object.entries(fuzzyOriginals)) {
       if (key !== '__next') {
-        const indexDistance = Math.abs(matchIndex - index)
+        const indexDistance = Math.abs(matchIndex - index);
         if (extendedTypeOf(item) === extendedTypeOf(candidate)) {
-          const { score } = this.diff(item, candidate)
+          const { score } = this.diff(item, candidate);
           if (
             !bestMatch ||
             score > bestMatch.score ||
-            (score === bestMatch.score &&
-              indexDistance < bestMatch.indexDistance)
+            (score === bestMatch.score && indexDistance < bestMatch.indexDistance)
           ) {
-            bestMatch = { score, key, indexDistance }
+            bestMatch = { score, key, indexDistance };
           }
         }
       }
     }
 
     // console.log"findMatchingObject result = " + JSON.stringify(bestMatch, null, 2)
-    return bestMatch
+    return bestMatch;
   }
 
-  scalarize (array, originals, fuzzyOriginals) {
-    const fuzzyMatches = []
+  scalarize(array, originals, fuzzyOriginals) {
+    const fuzzyMatches = [];
     if (fuzzyOriginals) {
       // Find best fuzzy match for each object in the array
-      const keyScores = {}
+      const keyScores = {};
       for (let index = 0; index < array.length; index++) {
-        const item = array[index]
+        const item = array[index];
         if (this.isScalar(item)) {
-          continue
+          continue;
         }
-        const bestMatch = this.findMatchingObject(item, index, fuzzyOriginals)
-        if (bestMatch && (!keyScores[bestMatch.key] || bestMatch.score > keyScores[bestMatch.key].score)) {
-          keyScores[bestMatch.key] = { score: bestMatch.score, index }
+        const bestMatch = this.findMatchingObject(item, index, fuzzyOriginals);
+        if (
+          bestMatch &&
+          (!keyScores[bestMatch.key] || bestMatch.score > keyScores[bestMatch.key].score)
+        ) {
+          keyScores[bestMatch.key] = { score: bestMatch.score, index };
         }
       }
       for (const [key, match] of Object.entries(keyScores)) {
-        fuzzyMatches[match.index] = key
+        fuzzyMatches[match.index] = key;
       }
     }
 
-    const result = []
+    const result = [];
     for (let index = 0; index < array.length; index++) {
-      const item = array[index]
+      const item = array[index];
       if (this.isScalar(item)) {
-        result.push(item)
+        result.push(item);
       } else {
-        const key = fuzzyMatches[index] || '__$!SCALAR' + originals.__next++
-        originals[key] = { item, index }
-        result.push(key)
+        const key = fuzzyMatches[index] || '__$!SCALAR' + originals.__next++;
+        originals[key] = { item, index };
+        result.push(key);
       }
     }
-    return result
+    return result;
   }
 
-  isScalarized (item, originals) {
-    return typeof item === 'string' && item in originals
+  isScalarized(item, originals) {
+    return typeof item === 'string' && item in originals;
   }
 
-  descalarize (item, originals) {
+  descalarize(item, originals) {
     if (this.isScalarized(item, originals)) {
-      return originals[item].item
+      return originals[item].item;
     } else {
-      return item
+      return item;
     }
   }
 
-  arrayDiff (obj1, obj2) {
-    const originals1 = { __next: 1 }
-    const seq1 = this.scalarize(obj1, originals1)
-    const originals2 = { __next: originals1.__next }
-    const seq2 = this.scalarize(obj2, originals2, originals1)
+  arrayDiff(obj1, obj2) {
+    const originals1 = { __next: 1 };
+    const seq1 = this.scalarize(obj1, originals1);
+    const originals2 = { __next: originals1.__next };
+    const seq2 = this.scalarize(obj2, originals2, originals1);
 
     if (this.options.sort) {
-      seq1.sort()
-      seq2.sort()
+      seq1.sort();
+      seq2.sort();
     }
-    const opcodes = new SequenceMatcher(null, seq1, seq2).getOpcodes()
+    const opcodes = new SequenceMatcher(null, seq1, seq2).getOpcodes();
 
     // console.log(`arrayDiff:\nobj1 = ${JSON.stringify(obj1, null, 2)}\nobj2 = ${JSON.stringify(obj2, null, 2)}\nseq1 = ${JSON.stringify(seq1, null, 2)}\nseq2 = ${JSON.stringify(seq2, null, 2)}\nopcodes = ${JSON.stringify(opcodes, null, 2)}`)
 
-    let result = []
-    let score = 0
-    let equal = true
+    let result = [];
+    let score = 0;
+    let equal = true;
 
     for (const [op, i1, i2, j1, j2] of opcodes) {
-      let i, j
-      let asc, end
-      let asc1, end1
-      let asc2, end2
+      let i, j;
+      let asc, end;
+      let asc1, end1;
+      let asc2, end2;
       if (!(op === 'equal' || (this.options.keysOnly && op === 'replace'))) {
-        equal = false
+        equal = false;
       }
 
       switch (op) {
         case 'equal':
-          for (
-            i = i1, end = i2, asc = i1 <= end;
-            asc ? i < end : i > end;
-            asc ? i++ : i--
-          ) {
-            const item = seq1[i]
+          for (i = i1, end = i2, asc = i1 <= end; asc ? i < end : i > end; asc ? i++ : i--) {
+            const item = seq1[i];
             if (this.isScalarized(item, originals1)) {
               if (!this.isScalarized(item, originals2)) {
                 throw new Error(
                   `internal bug: isScalarized(item, originals1) != isScalarized(item, originals2) for item ${JSON.stringify(
                     item
                   )}`
-                )
+                );
               }
-              const item1 = this.descalarize(item, originals1)
-              const item2 = this.descalarize(item, originals2)
-              const change = this.diff(item1, item2)
+              const item1 = this.descalarize(item, originals1);
+              const item2 = this.descalarize(item, originals2);
+              const change = this.diff(item1, item2);
               if (!change.equal) {
-                result.push(['~', change.result])
-                equal = false
+                result.push(['~', change.result]);
+                equal = false;
               } else {
                 if (this.options.full || this.options.keepUnchangedValues) {
-                  result.push([' ', item1])
+                  result.push([' ', item1]);
                 } else {
-                  result.push([' '])
+                  result.push([' ']);
                 }
               }
             } else {
               if (this.options.full || this.options.keepUnchangedValues) {
-                result.push([' ', item])
+                result.push([' ', item]);
               } else {
-                result.push([' '])
+                result.push([' ']);
               }
             }
-            score += 10
+            score += 10;
           }
-          break
+          break;
         case 'delete':
-          for (
-            i = i1, end1 = i2, asc1 = i1 <= end1;
-            asc1 ? i < end1 : i > end1;
-            asc1 ? i++ : i--
-          ) {
-            result.push(['-', this.descalarize(seq1[i], originals1)])
-            score -= 5
+          for (i = i1, end1 = i2, asc1 = i1 <= end1; asc1 ? i < end1 : i > end1; asc1 ? i++ : i--) {
+            result.push(['-', this.descalarize(seq1[i], originals1)]);
+            score -= 5;
           }
-          break
+          break;
         case 'insert':
-          for (
-            j = j1, end2 = j2, asc2 = j1 <= end2;
-            asc2 ? j < end2 : j > end2;
-            asc2 ? j++ : j--
-          ) {
-            result.push(['+', this.descalarize(seq2[j], originals2)])
-            score -= 5
+          for (j = j1, end2 = j2, asc2 = j1 <= end2; asc2 ? j < end2 : j > end2; asc2 ? j++ : j--) {
+            result.push(['+', this.descalarize(seq2[j], originals2)]);
+            score -= 5;
           }
-          break
+          break;
         case 'replace':
           if (!this.options.keysOnly) {
-            let asc3, end3
-            let asc4, end4
+            let asc3, end3;
+            let asc4, end4;
             for (
               i = i1, end3 = i2, asc3 = i1 <= end3;
               asc3 ? i < end3 : i > end3;
               asc3 ? i++ : i--
             ) {
-              result.push(['-', this.descalarize(seq1[i], originals1)])
-              score -= 5
+              result.push(['-', this.descalarize(seq1[i], originals1)]);
+              score -= 5;
             }
             for (
               j = j1, end4 = j2, asc4 = j1 <= end4;
               asc4 ? j < end4 : j > end4;
               asc4 ? j++ : j--
             ) {
-              result.push(['+', this.descalarize(seq2[j], originals2)])
-              score -= 5
+              result.push(['+', this.descalarize(seq2[j], originals2)]);
+              score -= 5;
             }
           } else {
-            let asc5, end5
+            let asc5, end5;
             for (
               i = i1, end5 = i2, asc5 = i1 <= end5;
               asc5 ? i < end5 : i > end5;
@@ -261,73 +251,73 @@ export default class JsonDiff {
               const change = this.diff(
                 this.descalarize(seq1[i], originals1),
                 this.descalarize(seq2[i - i1 + j1], originals2)
-              )
+              );
               if (!change.equal) {
-                result.push(['~', change.result])
-                equal = false
+                result.push(['~', change.result]);
+                equal = false;
               } else {
-                result.push([' '])
+                result.push([' ']);
               }
             }
           }
-          break
+          break;
       }
     }
 
     if (equal || opcodes.length === 0) {
       if (!this.options.full) {
-        result = undefined
+        result = undefined;
       } else {
-        result = obj1
+        result = obj1;
       }
-      score = 100
+      score = 100;
     } else {
-      score = Math.max(0, score)
+      score = Math.max(0, score);
     }
 
-    return { score, result, equal }
+    return { score, result, equal };
   }
 
-  diff (obj1, obj2) {
-    const type1 = extendedTypeOf(obj1)
-    const type2 = extendedTypeOf(obj2)
+  diff(obj1, obj2) {
+    const type1 = extendedTypeOf(obj1);
+    const type2 = extendedTypeOf(obj2);
 
     if (type1 === type2) {
       switch (type1) {
         case 'object':
-          return this.objectDiff(obj1, obj2)
+          return this.objectDiff(obj1, obj2);
 
         case 'array':
-          return this.arrayDiff(obj1, obj2)
+          return this.arrayDiff(obj1, obj2);
       }
     }
 
     // Compare primitives or complex objects of different types
-    let score = 100
-    let result = obj1
-    let equal
+    let score = 100;
+    let result = obj1;
+    let equal;
     if (!this.options.keysOnly) {
       if (type1 === 'date' && type2 === 'date') {
-        equal = obj1.getTime() === obj2.getTime()
+        equal = obj1.getTime() === obj2.getTime();
       } else {
-        equal = obj1 === obj2
+        equal = obj1 === obj2;
       }
       if (!equal) {
-        score = 0
+        score = 0;
 
         if (this.options.outputNewOnly) {
-          result = obj2
+          result = obj2;
         } else {
-          result = { __old: obj1, __new: obj2 }
+          result = { __old: obj1, __new: obj2 };
         }
       } else if (!this.options.full) {
-        result = undefined
+        result = undefined;
       }
     } else {
-      equal = true
-      result = undefined
+      equal = true;
+      result = undefined;
     }
 
-    return { score, result, equal }
+    return { score, result, equal };
   }
 }

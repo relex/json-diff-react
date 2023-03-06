@@ -2,42 +2,41 @@ import { diffRender, DiffOptions, StyleCustomization } from './JsonDiff/Internal
 import React from 'react';
 
 const defaultStyleCustomization: StyleCustomization = {
-  additionLineStyle: { 
-    color: "green",
-    lineHeight: 0.5
+  additionLineStyle: {
+    color: 'green',
+    lineHeight: 0.5,
   },
-  additionClassName: "addition",
-  deletionLineStyle: { 
-    color: "red" ,
-    lineHeight: 0.5
+  additionClassName: 'addition',
+  deletionLineStyle: {
+    color: 'red',
+    lineHeight: 0.5,
   },
-  deletionClassName: "deletion",
+  deletionClassName: 'deletion',
   unchangedLineStyle: {
-    lineHeight: 0.5
+    lineHeight: 0.5,
   },
-  unchangedClassName: "unchanged",
+  unchangedClassName: 'unchanged',
   frameStyle: {},
-  frameClassName: "diff"
-}
+  frameClassName: 'diff',
+};
 
 export function mkCustomization(customizations: Partial<StyleCustomization>): StyleCustomization {
   return { ...defaultStyleCustomization, ...customizations };
 }
 
-export function JsonDiffComponent
-  ({ original, 
-     latest, 
-     onError,
-     styleCustomization = {}, 
-     jsonDiffOptions = {}
-  }: { 
-     original: string, 
-     latest: string, 
-     onError: (e: Error) => JSX.Element,
-     styleCustomization?: Partial<StyleCustomization>,
-     jsonDiffOptions?: DiffOptions
-  }): JSX.Element {
-
+export function JsonDiffComponent({
+  original,
+  latest,
+  onError,
+  styleCustomization = {},
+  jsonDiffOptions = {},
+}: {
+  original: string;
+  latest: string;
+  onError: (e: Error) => JSX.Element;
+  styleCustomization?: Partial<StyleCustomization>;
+  jsonDiffOptions?: DiffOptions;
+}): JSX.Element {
   let actualCustomization = styleCustomization ?? {};
   let fullCustomization = mkCustomization(actualCustomization);
 
@@ -45,20 +44,11 @@ export function JsonDiffComponent
     let parsedOriginal = JSON.parse(original);
     let parsedLatest = JSON.parse(latest);
 
-    let diffElement = diffRender(
-      parsedOriginal, 
-      parsedLatest, 
-      jsonDiffOptions,
-      fullCustomization
-    );
+    let diffElement = diffRender(parsedOriginal, parsedLatest, jsonDiffOptions, fullCustomization);
 
-    return (
-      <div>
-        {diffElement}
-      </div>
-    );
-  } catch(e: any) {
-    return onError(new Error(e.toString())); 
+    return <div>{diffElement}</div>;
+  } catch (e: any) {
+    return onError(new Error(e.toString()));
   }
 }
 
