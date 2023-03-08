@@ -24,5 +24,9 @@
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx"
+  ],
+  "exclude": [
+    "src/**/*.snap",
+    "src/**/*.test.*"
   ]
 }
