@@ -1,22 +1,15 @@
 import { diffRender, JsonValue, DiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
 import React from 'react';
 
+// Default style customization only sets class names to their default values.
 const defaultStyleCustomization: StyleCustomization = {
-  additionLineStyle: {
-    color: 'green',
-    lineHeight: 0.5,
-  },
+  additionLineStyle: null,
   additionClassName: 'addition',
-  deletionLineStyle: {
-    color: 'red',
-    lineHeight: 0.5,
-  },
+  deletionLineStyle: null,
   deletionClassName: 'deletion',
-  unchangedLineStyle: {
-    lineHeight: 0.5,
-  },
+  unchangedLineStyle: null,
   unchangedClassName: 'unchanged',
-  frameStyle: {},
+  frameStyle: null,
   frameClassName: 'diff',
 };
 

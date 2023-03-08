@@ -63,41 +63,41 @@ component looks and rename the CSS classes.
 
 ``` typescript
 export type StyleCustomization = {
-  additionLineStyle: CSS.Properties,
-  additionClassName: string,
-  deletionLineStyle: CSS.Properties,
-  deletionClassName: string,
-  unchangedLineStyle: CSS.Properties,
-  unchangedClassName: string,
-  frameStyle: CSS.Properties,
-  frameClassName: string
-}
+  additionLineStyle: CSS.Properties | null;
+  additionClassName: string | null | undefined;
+  deletionLineStyle: CSS.Properties | null;
+  deletionClassName: string | null | undefined;
+  unchangedLineStyle: CSS.Properties | null;
+  unchangedClassName: string | null | undefined;
+  frameStyle: CSS.Properties | null;
+  frameClassName: string | null | undefined;
+};
 ```
 
 Explanation of each customization option:
 
 * `additionLineStyle`: `style` attribute of the HTML `<span>` element that is
   used to render additions in the diff
-  * Defaults to `{ color: "green", "lineHeight": 0.5 }` if not specified
+  * Defaults to `null` if not specified
 * `additionClassName`: `className` attribute of the HTML `<span>` element that
   is used to render additions in the diff
   * Defaults to `addition` if not specified
 * `deletionLineStyle`: `style` attribute of the HTML `<span>` element that is
   used to render deletions in the diff
-  * Defaults to `{ color: "red", "lineHeight": 0.5 }` if not specified
+  * Defaults to `null` if not specified
 * `deletionClassName`: `className` attribute of the HTML `<span>` element that
   is used to render deletions in the diff
   * Defaults to `deletion` if not specified
 * `unchangedLineStyle`: `style` attribute of the HTML `<span>` element that is
   used to render unchanged lines in the diff
-  * Defaults to `{ "lineHeight": 0.5 }` if not specified
+  * Defaults to `null` if not specified
 * `unchangedClassName`: `className` attribute of the HTML `<span>` element that
   is used to render unchanged lines in the diff
   * Defaults to `unchanged` if not specified
 * `frameStyle`: `style` attribute of the HTML `<div>` element that contains the
   rendered diff
   * Can be used to customize background, etc.
-  * Defaults to no customizations if not specified.
+  * Defaults to `null` if not specified
 * `frameClassName`: `className` attribute of the HTML `<div>` element that
   contains the rendered diff
   * Defaults to `diff`

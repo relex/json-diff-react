@@ -16,14 +16,14 @@ import * as JsonDiffTypes from 'json-diff';
 import CSS from 'csstype';
 
 export type StyleCustomization = {
-  additionLineStyle: CSS.Properties;
-  additionClassName: string;
-  deletionLineStyle: CSS.Properties;
-  deletionClassName: string;
-  unchangedLineStyle: CSS.Properties;
-  unchangedClassName: string;
-  frameStyle: CSS.Properties;
-  frameClassName: string;
+  additionLineStyle: CSS.Properties | null;
+  additionClassName: string | null | undefined;
+  deletionLineStyle: CSS.Properties | null;
+  deletionClassName: string | null | undefined;
+  unchangedLineStyle: CSS.Properties | null;
+  unchangedClassName: string | null | undefined;
+  frameStyle: CSS.Properties | null;
+  frameClassName: string | null | undefined;
 };
 
 // Definition of 'DiffOptions' in DefinitelyTyped is outdated.

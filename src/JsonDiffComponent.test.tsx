@@ -104,13 +104,11 @@ describe('<JsonDiffComponent />', () => {
           .toJSON();
 
         expect(tree).toMatchInlineSnapshot(`
-          <div>
-            <div
-              className="diff"
-              style={{}}
-            >
-              <pre />
-            </div>
+          <div
+            className="diff"
+            style={null}
+          >
+            <pre />
           </div>
         `);
       })
