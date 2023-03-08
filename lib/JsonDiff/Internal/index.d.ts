@@ -18,4 +18,4 @@ export type JsonValue = {
     [x: string]: JsonValue;
 } | Array<JsonValue> | string | number | boolean | null;
 export declare function diff(obj1: unknown, obj2: unknown, options?: DiffOptions): any;
-export declare function diffRender(obj1: JsonValue, obj2: JsonValue, options: DiffOptions | undefined, customization: StyleCustomization): JSX.Element;
+export declare function diffRender(jsonA: JsonValue, jsonB: JsonValue, options: DiffOptions | undefined, customization: StyleCustomization): JSX.Element;

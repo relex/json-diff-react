@@ -7,15 +7,15 @@ import React from 'react';
 import { JsonValue, JsonDiffComponent, StyleCustomization } from './JsonDiffComponent';
 
 const runSnapshotTest = (
-  original: JsonValue,
-  latest: JsonValue,
+  jsonA: JsonValue,
+  jsonB: JsonValue,
   styleCustomization: Partial<StyleCustomization>
 ) => {
   const tree = renderer
     .create(
       <JsonDiffComponent
-        original={original}
-        latest={latest}
+        jsonA={jsonA}
+        jsonB={jsonB}
         styleCustomization={styleCustomization}
       />
     )
@@ -24,48 +24,48 @@ const runSnapshotTest = (
   expect(tree).toMatchSnapshot();
 };
 
-const runSimpleSnapshotTest = (original: JsonValue, latest: JsonValue) => {
-  runSnapshotTest(original, latest, {});
+const runSimpleSnapshotTest = (jsonA: JsonValue, jsonB: JsonValue) => {
+  runSnapshotTest(jsonA, jsonB, {});
 };
 
 describe('<JsonDiffComponent />', () => {
   it('it should render correctly (objects vs object)', () => {
-    const original = {
+    const jsonA = {
       key1: 'value1',
       key2: 123,
       key3: [1, 2, 3],
     };
 
-    const latest = {
+    const jsonB = {
       key1: 'value',
       key2: 123,
       key3: [1, 2, 3, 4],
     };
 
-    runSimpleSnapshotTest(original, latest);
+    runSimpleSnapshotTest(jsonA, jsonB);
   });
 
   it('it should render correctly (array vs array)', () => {
-    const original = [1, 2, 3];
-    const latest = [1, 2, 3, 4];
+    const jsonA = [1, 2, 3];
+    const jsonB = [1, 2, 3, 4];
 
-    runSimpleSnapshotTest(original, latest);
+    runSimpleSnapshotTest(jsonA, jsonB);
   });
 
   it('it should render correctly (object vs array)', () => {
-    const original = {
+    const jsonA = {
       key1: 'value1',
       key2: 123,
       key3: [1, 2, 3],
     };
-    const latest = [1, 2, 3, 4];
+    const jsonB = [1, 2, 3, 4];
 
-    runSimpleSnapshotTest(original, latest);
+    runSimpleSnapshotTest(jsonA, jsonB);
   });
 
   it('should pick up CSS classes from styleCustomization', () => {
-    const original = { key1: 'value1', key2: 123, key3: [1, 2, 3] };
-    const latest = { key1: 'value', key2: 123, key3: [1, 2, 3, 4] };
+    const jsonA = { key1: 'value1', key2: 123, key3: [1, 2, 3] };
+    const jsonB = { key1: 'value', key2: 123, key3: [1, 2, 3, 4] };
 
     const styleCustomization: Partial<StyleCustomization> = {
       additionClassName: 'custom_addition_class',
@@ -74,12 +74,12 @@ describe('<JsonDiffComponent />', () => {
       frameClassName: 'custom_frame_class',
     };
 
-    runSnapshotTest(original, latest, styleCustomization);
+    runSnapshotTest(jsonA, jsonB, styleCustomization);
   });
 
   it('should pick up CSS styles from styleCustomization', () => {
-    const original = { key1: 'value1', key2: 123, key3: [1, 2, 3] };
-    const latest = { key1: 'value', key2: 123, key3: [1, 2, 3, 4] };
+    const jsonA = { key1: 'value1', key2: 123, key3: [1, 2, 3] };
+    const jsonB = { key1: 'value', key2: 123, key3: [1, 2, 3, 4] };
 
     const styleCustomization: Partial<StyleCustomization> = {
       additionLineStyle: { lineHeight: 1 },
@@ -88,7 +88,7 @@ describe('<JsonDiffComponent />', () => {
       frameStyle: { backgroundColor: 'black' },
     };
 
-    runSnapshotTest(original, latest, styleCustomization);
+    runSnapshotTest(jsonA, jsonB, styleCustomization);
   });
 
   it('should return an empty div if there are no changes (snapshot)', () => {
@@ -100,7 +100,7 @@ describe('<JsonDiffComponent />', () => {
       fc.property(fc.json(), (json) => {
         const parsedJson = JSON.parse(json);
         const tree = renderer
-          .create(<JsonDiffComponent original={parsedJson} latest={parsedJson} />)
+          .create(<JsonDiffComponent jsonA={parsedJson} jsonB={parsedJson} />)
           .toJSON();
 
         expect(tree).toMatchInlineSnapshot(`

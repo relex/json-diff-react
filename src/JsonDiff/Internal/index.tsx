@@ -56,10 +56,10 @@ export function diff(
 }
 
 export function diffRender(
-  obj1: JsonValue,
-  obj2: JsonValue,
+  jsonA: JsonValue,
+  jsonB: JsonValue,
   options: DiffOptions = {},
   customization: StyleCustomization
 ): JSX.Element {
-  return colorize(diff(obj1, obj2, options), options, customization);
+  return colorize(diff(jsonA, jsonB, options), options, customization);
 }

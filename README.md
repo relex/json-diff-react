@@ -18,12 +18,12 @@ component.
 
 The `<JsonDiffComponent />` requires 4 input properties:
 
-1. `original`: original JSON value
-   - The caller is responsible for providing a valid, parsed JSON value
-2. `latest`: a JSON value that is compared to `original`
+1. `jsonA`: a JSON value
+   - The caller is responsible for providing a valid, parsed JSON value (e.g. via `JSON.parse`)
+2. `jsonB`: a JSON value that is compared to `jsonA`
    - The caller is responsible for providing a valid, parsed JSON value
 3. `styleCustomization`: CSS customization of the markup
-4. `jsonDiffOptions`: options that are fed directly to `json-diff`
+4. `jsonDiffOptions`: options that are fed directly to original `json-diff` code
 
 ### Style customization
 
