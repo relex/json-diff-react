@@ -32,14 +32,11 @@ export function JsonDiffComponent(props: {
   styleCustomization?: Partial<StyleCustomization>;
   jsonDiffOptions?: DiffOptions;
 }): JSX.Element {
-  let actualCustomization = props.styleCustomization ?? {};
-  let fullCustomization = mkCustomization(actualCustomization);
-
   return diffRender(
     props.jsonA,
     props.jsonB,
     props.jsonDiffOptions,
-    fullCustomization
+    mkCustomization(props.styleCustomization ?? {})
   );
 }
 
