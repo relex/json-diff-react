@@ -1,4 +1,4 @@
-import { diffRender, DiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
+import { diffRender, JsonValue, DiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
 import React from 'react';
 
 const defaultStyleCustomization: StyleCustomization = {
@@ -24,33 +24,32 @@ export function mkCustomization(customizations: Partial<StyleCustomization>): St
   return { ...defaultStyleCustomization, ...customizations };
 }
 
-export function JsonDiffComponent({
-  original,
-  latest,
-  onError,
-  styleCustomization = {},
-  jsonDiffOptions = {},
-}: {
-  original: string;
-  latest: string;
-  onError: (e: Error) => JSX.Element;
+/**
+ * React.js functional component for a structural JSON diff.
+ *
+ * @param {Object} props - properties of the component
+ * @param {JsonValue} props.original - parsed JSON value
+ * @param {JsonValue} props.latest - parsed JSON value
+ * @param {Partial<StyleCustomization>=} props.styleCustomization
+ * @param {DiffOptions} props.jsonDiffOptions - properties passed to json-diff
+ */
+export function JsonDiffComponent(props: {
+  original: JsonValue;
+  latest: JsonValue;
   styleCustomization?: Partial<StyleCustomization>;
   jsonDiffOptions?: DiffOptions;
 }): JSX.Element {
-  let actualCustomization = styleCustomization ?? {};
+  let actualCustomization = props.styleCustomization ?? {};
   let fullCustomization = mkCustomization(actualCustomization);
 
-  try {
-    let parsedOriginal = JSON.parse(original);
-    let parsedLatest = JSON.parse(latest);
-
-    let diffElement = diffRender(parsedOriginal, parsedLatest, jsonDiffOptions, fullCustomization);
-
-    return <div>{diffElement}</div>;
-  } catch (e: any) {
-    return onError(new Error(e.toString()));
-  }
+  let diffElement = diffRender(
+    props.original,
+    props.latest,
+    props.jsonDiffOptions,
+    fullCustomization
+  );
+  return <div>{diffElement}</div>;
 }
 
 // Re-export 'StyleCustomization' and 'DiffOptions'
-export type { StyleCustomization, DiffOptions } from './JsonDiff/Internal/index';
+export type { StyleCustomization, DiffOptions, JsonValue } from './JsonDiff/Internal/index';

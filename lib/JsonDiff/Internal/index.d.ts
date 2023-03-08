@@ -1,7 +1,6 @@
 /// <reference types="react" />
-import { DiffOptions } from 'json-diff';
+import * as JsonDiffTypes from 'json-diff';
 import CSS from 'csstype';
-export type { DiffOptions } from 'json-diff';
 export type StyleCustomization = {
     additionLineStyle: CSS.Properties;
     additionClassName: string;
@@ -12,5 +11,11 @@ export type StyleCustomization = {
     frameStyle: CSS.Properties;
     frameClassName: string;
 };
+export type DiffOptions = JsonDiffTypes.DiffOptions & {
+    excludeKeys?: string[];
+};
+export type JsonValue = {
+    [x: string]: JsonValue;
+} | Array<JsonValue> | string | number | boolean | null;
 export declare function diff(obj1: unknown, obj2: unknown, options?: DiffOptions): any;
-export declare function diffRender(obj1: unknown, obj2: unknown, options: DiffOptions | undefined, customization: StyleCustomization): JSX.Element;
+export declare function diffRender(obj1: JsonValue, obj2: JsonValue, options: DiffOptions | undefined, customization: StyleCustomization): JSX.Element;

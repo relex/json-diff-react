@@ -4,12 +4,11 @@ import renderer from 'react-test-renderer';
 
 import React from 'react';
 
-import { JsonDiffComponent, StyleCustomization } from './JsonDiffComponent';
+import { JsonValue, JsonDiffComponent, StyleCustomization } from './JsonDiffComponent';
 
 const runSnapshotTest = (
-  original: string,
-  latest: string,
-  onError: (e: Error) => JSX.Element,
+  original: JsonValue,
+  latest: JsonValue,
   styleCustomization: Partial<StyleCustomization>
 ) => {
   const tree = renderer
@@ -17,18 +16,16 @@ const runSnapshotTest = (
       <JsonDiffComponent
         original={original}
         latest={latest}
-        onError={onError}
         styleCustomization={styleCustomization}
       />
     )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
-  expect(onError).not.toHaveBeenCalled();
 };
 
-const runSimpleSnapshotTest = (original: string, latest: string) => {
-  runSnapshotTest(original, latest, jest.fn(), {});
+const runSimpleSnapshotTest = (original: JsonValue, latest: JsonValue) => {
+  runSnapshotTest(original, latest, {});
 };
 
 describe('<JsonDiffComponent />', () => {
@@ -45,14 +42,14 @@ describe('<JsonDiffComponent />', () => {
       key3: [1, 2, 3, 4],
     };
 
-    runSimpleSnapshotTest(JSON.stringify(original), JSON.stringify(latest));
+    runSimpleSnapshotTest(original, latest);
   });
 
   it('it should render correctly (array vs array)', () => {
     const original = [1, 2, 3];
     const latest = [1, 2, 3, 4];
 
-    runSimpleSnapshotTest(JSON.stringify(original), JSON.stringify(latest));
+    runSimpleSnapshotTest(original, latest);
   });
 
   it('it should render correctly (object vs array)', () => {
@@ -63,7 +60,7 @@ describe('<JsonDiffComponent />', () => {
     };
     const latest = [1, 2, 3, 4];
 
-    runSimpleSnapshotTest(JSON.stringify(original), JSON.stringify(latest));
+    runSimpleSnapshotTest(original, latest);
   });
 
   it('should pick up CSS classes from styleCustomization', () => {
@@ -77,12 +74,7 @@ describe('<JsonDiffComponent />', () => {
       frameClassName: 'custom_frame_class',
     };
 
-    runSnapshotTest(
-      JSON.stringify(original),
-      JSON.stringify(latest),
-      jest.fn(),
-      styleCustomization
-    );
+    runSnapshotTest(original, latest, styleCustomization);
   });
 
   it('should pick up CSS styles from styleCustomization', () => {
@@ -96,27 +88,21 @@ describe('<JsonDiffComponent />', () => {
       frameStyle: { backgroundColor: 'black' },
     };
 
-    runSnapshotTest(
-      JSON.stringify(original),
-      JSON.stringify(latest),
-      jest.fn(),
-      styleCustomization
-    );
+    runSnapshotTest(original, latest, styleCustomization);
   });
 
   it('should return an empty div if there are no changes (snapshot)', () => {
-    runSimpleSnapshotTest('{}', '{}');
+    runSimpleSnapshotTest({}, {});
   });
 
   it('should return an empty div if there are no changes (property)', () => {
     fc.assert(
       fc.property(fc.json(), (json) => {
-        const onError = jest.fn();
+        const parsedJson = JSON.parse(json);
         const tree = renderer
-          .create(<JsonDiffComponent original={json} latest={json} onError={onError} />)
+          .create(<JsonDiffComponent original={parsedJson} latest={parsedJson} />)
           .toJSON();
 
-        expect(onError).not.toHaveBeenCalled();
         expect(tree).toMatchInlineSnapshot(`
           <div>
             <div
@@ -127,44 +113,6 @@ describe('<JsonDiffComponent />', () => {
             </div>
           </div>
         `);
-      })
-    );
-  });
-
-  it('onError should not be called if both inputs are JSON encoded', () => {
-    fc.assert(
-      fc.property(fc.json(), fc.json(), (original, latest) => {
-        const onError = jest.fn();
-        renderer
-          .create(<JsonDiffComponent original={original} latest={latest} onError={onError} />)
-          .toJSON();
-
-        expect(onError).not.toHaveBeenCalled();
-      })
-    );
-  });
-
-  it('onError should be called if either input is not valid JSON', () => {
-    function isValidJSON(str: string): boolean {
-      try {
-        JSON.parse(str);
-      } catch (e) {
-        return false;
-      }
-
-      return true;
-    }
-
-    fc.assert(
-      fc.property(fc.string(), fc.string(), (original, latest) => {
-        fc.pre(!isValidJSON(original) || isValidJSON(latest));
-
-        const onError = jest.fn();
-        renderer
-          .create(<JsonDiffComponent original={original} latest={latest} onError={onError} />)
-          .toJSON();
-
-        expect(onError).toHaveBeenCalled();
       })
     );
   });

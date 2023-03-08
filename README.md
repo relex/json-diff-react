@@ -3,7 +3,7 @@
 ![Example of the React component](example.png)
 
 A react component that renders a structural diff of two JSON values. Written
-in TypeScript except for the JavaScript code inherited from `json-diff`. 
+in TypeScript except for the JavaScript code inherited from `json-diff`.
 Types are declared for all user facing functionality.
 
 This is a fork of https://github.com/andreyvit/json-diff with all of the
@@ -18,14 +18,10 @@ component.
 
 The `<JsonDiffComponent />` requires 4 input properties:
 
-1. `original`: original string of JSON text
-   - If the text can't be parsed as JSON, an error is rendered.
-2. `latest`: new string of JSON text that is compared to `original`
-   - If the text can't be parsed as JSON, an error is rendered.
-3. `onError`: callback function that is called if an error occurs
-   - Mostly used to handle situations where `original` or `latest` cannot be
-     parsed as JSON
-   - Use this to render the error in any way you want.
+1. `original`: original JSON value
+   - The caller is responsible for providing a valid, parsed JSON value
+2. `latest`: a JSON value that is compared to `original`
+   - The caller is responsible for providing a valid, parsed JSON value
 3. `styleCustomization`: CSS customization of the markup
 4. `jsonDiffOptions`: options that are fed directly to `json-diff`
 
@@ -40,7 +36,7 @@ There are two ways to customize the look of the component:
 
 Import a CSS file that defines the following classes to your `.tsx` file:
 
-``` scss 
+``` scss
 .deletion {
   /* customization for deleted lines (span) */
 }
@@ -65,7 +61,7 @@ The names of the classes can be customized via `styleCustomization`.
 You can also use the `styleCustomization` property to customize how the
 component looks and rename the CSS classes.
 
-``` typescript 
+``` typescript
 export type StyleCustomization = {
   additionLineStyle: CSS.Properties,
   additionClassName: string,
@@ -103,7 +99,7 @@ Explanation of each customization option:
   * Can be used to customize background, etc.
   * Defaults to no customizations if not specified.
 * `frameClassName`: `className` attribute of the HTML `<div>` element that
-  contains the rendered diff 
+  contains the rendered diff
   * Defaults to `diff`
 
 
@@ -112,7 +108,7 @@ Explanation of each customization option:
 You can pass options to the underlying `json-diff` functions via
 `jsonDiffOptions` which has the following type:
 
-``` typescript 
+``` typescript
 export interface DiffOptions {
     verbose?: boolean;
     raw?: boolean;
@@ -131,3 +127,7 @@ All of the fields are optional. Consult the original `json-diff` library to
 learn more about how the options affect the output.
 
 This type came from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/index.d.ts.
+
+N.B. I added the `excludeKeys` attribute to the `DiffOptions` imported from
+`DefinitelyTyped`. It appears like the type definitions in `DefinitelyTyped`
+are outdated.

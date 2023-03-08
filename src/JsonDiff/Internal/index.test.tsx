@@ -9,7 +9,7 @@
 
 const path = require('path');
 const assert = require('assert');
-const { diff } = require('./index.tsx');
+import { diff } from './index';
 
 export {};
 
