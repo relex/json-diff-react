@@ -11,16 +11,31 @@ dependencies towards `node.js` core modules removed. Code from `json-diff` can
 be found under `src/JsonDiff/Internal` and it's mostly unchanged - expect for
 the `colorize` module which now returns a JSX element instead of a string.
 
-Look into the `example` directory to find an example application that uses this
+## Simple example
+
+``` typescript
+function App({ a, b } : { a: string, b: string}): JSX.Element {
+  try {
+    const parsedA = JSON.parse(a)
+    const parsedB = JSON.parse(b);
+
+    return <JsonDiffComponent jsonA={parsedA} jsonB={parsedB} />;
+  } catch(e: any) {
+    return <p>{"Error: " + e.message}</p>;
+  }
+}
+```
+
+Look into the `examples` directory to find more examples on how to use this
 component.
 
-## Customization
+## Usage
 
 The `<JsonDiffComponent />` requires 4 input properties:
 
-1. `jsonA`: a JSON value
+1. `jsonA`: a JSON value (mandatory property)
    - The caller is responsible for providing a valid, parsed JSON value (e.g. via `JSON.parse`)
-2. `jsonB`: a JSON value that is compared to `jsonA`
+2. `jsonB`: a JSON value that is compared to `jsonA` (mandatory property)
    - The caller is responsible for providing a valid, parsed JSON value
 3. `styleCustomization`: CSS customization of the markup
 4. `jsonDiffOptions`: options that are fed directly to original `json-diff` code
@@ -120,14 +135,31 @@ export interface DiffOptions {
     outputNewOnly?: boolean;
     maxElisions?: number;
     precision?: number;
+    excludeKeys?: string[];
 }
 ```
 
 All of the fields are optional. Consult the original `json-diff` library to
-learn more about how the options affect the output.
+learn more about how the options impact the output.
 
-This type came from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/index.d.ts.
+Most of this type came from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/index.d.ts.
 
 N.B. I added the `excludeKeys` attribute to the `DiffOptions` imported from
 `DefinitelyTyped`. It appears like the type definitions in `DefinitelyTyped`
 are outdated.
+
+## Authors
+
+Thanks to Andrey Tarantsov for the work he did on the original [json-diff](https://github.com/andreyvit/json-diff)
+package. This package is just a thin wrapper on top of it.
+
+Thanks to Viacheslav Lotsmanov for providing code review and change suggestions.
+
+This package was built at [RELEX](https://www.relexsolutions.com/).
+
+Main developer: [Joonas Laukka](https://github.com/skyvier).
+
+## License
+
+This software is distributed under the MIT license. For details, have a look at
+[LICENSE-MIT](./LICENSE-MIT).
