@@ -42,13 +42,12 @@ export function JsonDiffComponent(props: {
   let actualCustomization = props.styleCustomization ?? {};
   let fullCustomization = mkCustomization(actualCustomization);
 
-  let diffElement = diffRender(
+  return diffRender(
     props.jsonA,
     props.jsonB,
     props.jsonDiffOptions,
     fullCustomization
   );
-  return <div>{diffElement}</div>;
 }
 
 // Re-export 'StyleCustomization' and 'DiffOptions'
