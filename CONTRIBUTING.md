@@ -1,3 +1,9 @@
+# How to load dependencies?
+
+1. If you are a nix user, enter nix shell with `nix-shell`
+   - That installs the NPM package manager in your env
+2. Install NPM package dependencies with `npm install`
+
 # How to contribute?
 
 1. Fix a bug or add a feature to the TypeScript code under `src`
