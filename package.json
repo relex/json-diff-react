@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "author": "Joonas Laukka <joonas.laukka@relexsolutions.com>",
   "description": "A React.js component based on the json-diff package",
-  "private": true,
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE-MIT"
   ],
   "dependencies": {
     "@ewoudenberg/difflib": "^0.1.0",
