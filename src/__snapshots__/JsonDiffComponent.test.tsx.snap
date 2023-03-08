@@ -6,48 +6,48 @@ exports[`<JsonDiffComponent /> it should render correctly (array vs array) 1`] =
   style={null}
 >
   <pre>
-    <span
+    <div
       className="unchanged"
       style={null}
     >
       [
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
         ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
         ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
         ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
         4
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
       ]
 
-    </span>
+    </div>
   </pre>
 </div>
 `;
@@ -58,111 +58,111 @@ exports[`<JsonDiffComponent /> it should render correctly (object vs array) 1`] 
   style={null}
 >
   <pre>
-    <span
+    <div
       className="deletion"
       style={null}
     >
       {
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
         key1: "value1"
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
         key2: 123
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
         key3: [
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
           1
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
           2
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
           3
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
         ]
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
       }
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
       [
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
         1
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
         2
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
         3
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
         4
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
       ]
 
-    </span>
+    </div>
   </pre>
 </div>
 `;
@@ -173,76 +173,76 @@ exports[`<JsonDiffComponent /> it should render correctly (objects vs object) 1`
   style={null}
 >
   <pre>
-    <span
+    <div
       className="unchanged"
       style={null}
     >
       {
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={null}
     >
         key1: "value1"
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
         key1: "value"
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
         key3: [
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={null}
     >
           4
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
         ]
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={null}
     >
       }
 
-    </span>
+    </div>
   </pre>
 </div>
 `;
@@ -253,76 +253,76 @@ exports[`<JsonDiffComponent /> should pick up CSS classes from styleCustomizatio
   style={null}
 >
   <pre>
-    <span
+    <div
       className="custom_unchanged_class"
       style={null}
     >
       {
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_deletion_class"
       style={null}
     >
         key1: "value1"
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_addition_class"
       style={null}
     >
         key1: "value"
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_unchanged_class"
       style={null}
     >
         key3: [
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_unchanged_class"
       style={null}
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_unchanged_class"
       style={null}
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_unchanged_class"
       style={null}
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_addition_class"
       style={null}
     >
           4
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_unchanged_class"
       style={null}
     >
         ]
 
-    </span>
-    <span
+    </div>
+    <div
       className="custom_unchanged_class"
       style={null}
     >
       }
 
-    </span>
+    </div>
   </pre>
 </div>
 `;
@@ -337,7 +337,7 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
   }
 >
   <pre>
-    <span
+    <div
       className="unchanged"
       style={
         {
@@ -347,8 +347,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
       {
 
-    </span>
-    <span
+    </div>
+    <div
       className="deletion"
       style={
         {
@@ -358,8 +358,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
         key1: "value1"
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={
         {
@@ -369,8 +369,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
         key1: "value"
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={
         {
@@ -380,8 +380,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
         key3: [
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={
         {
@@ -391,8 +391,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={
         {
@@ -402,8 +402,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={
         {
@@ -413,8 +413,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
           ...
 
-    </span>
-    <span
+    </div>
+    <div
       className="addition"
       style={
         {
@@ -424,8 +424,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
           4
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={
         {
@@ -435,8 +435,8 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
         ]
 
-    </span>
-    <span
+    </div>
+    <div
       className="unchanged"
       style={
         {
@@ -446,7 +446,7 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
     >
       }
 
-    </span>
+    </div>
   </pre>
 </div>
 `;
