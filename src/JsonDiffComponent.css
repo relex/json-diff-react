@@ -1,13 +1,13 @@
 .deletion {
-  /* customization for deleted lines (span) */
+  /* customization for deleted lines (div) */
 }
 
 .addition {
-  /* customization for added lines (span) */
+  /* customization for added lines (div) */
 }
 
 .unchanged {
-  /* customization for unchanged lines (span) */
+  /* customization for unchanged lines (div) */
 }
 
 .diff {

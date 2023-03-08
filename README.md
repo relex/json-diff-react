@@ -36,21 +36,21 @@ There are two ways to customize the look of the component:
 
 Import a CSS file that defines the following classes to your `.tsx` file:
 
-``` scss
+``` css
 .deletion {
-  /* customization for deleted lines (span) */
+  /* customization for deleted lines (div) */
 }
 
 .addition {
-  /* customization for added lines (span) */
+  /* customization for added lines (div) */
 }
 
 .unchanged {
-  /* customization for unchanged lines (span) */
+  /* customization for unchanged lines (div) */
 }
 
 .diff {
-  /* customization for the <div> that contains the diff
+  /* customization for the top-level <div> wrapper that contains the diff */
 }
 ```
 
@@ -76,30 +76,30 @@ export type StyleCustomization = {
 
 Explanation of each customization option:
 
-* `additionLineStyle`: `style` attribute of the HTML `<span>` element that is
-  used to render additions in the diff
+* `additionLineStyle`: `style` attribute of the HTML `<div>` element that is
+  used to render added lines in the diff
   * Defaults to `null` if not specified
-* `additionClassName`: `className` attribute of the HTML `<span>` element that
-  is used to render additions in the diff
+* `additionClassName`: `className` attribute of the HTML `<div>` element that
+  is used to render added lines in the diff
   * Defaults to `addition` if not specified
-* `deletionLineStyle`: `style` attribute of the HTML `<span>` element that is
-  used to render deletions in the diff
+* `deletionLineStyle`: `style` attribute of the HTML `<div>` element that is
+  used to render deleted lines in the diff
   * Defaults to `null` if not specified
-* `deletionClassName`: `className` attribute of the HTML `<span>` element that
-  is used to render deletions in the diff
+* `deletionClassName`: `className` attribute of the HTML `<div>` element that
+  is used to render deleted lines in the diff
   * Defaults to `deletion` if not specified
-* `unchangedLineStyle`: `style` attribute of the HTML `<span>` element that is
+* `unchangedLineStyle`: `style` attribute of the HTML `<div>` element that is
   used to render unchanged lines in the diff
   * Defaults to `null` if not specified
-* `unchangedClassName`: `className` attribute of the HTML `<span>` element that
+* `unchangedClassName`: `className` attribute of the HTML `<div>` element that
   is used to render unchanged lines in the diff
   * Defaults to `unchanged` if not specified
 * `frameStyle`: `style` attribute of the HTML `<div>` element that contains the
-  rendered diff
+  whole rendered diff, i.e. the top level `div`
   * Can be used to customize background, etc.
   * Defaults to `null` if not specified
 * `frameClassName`: `className` attribute of the HTML `<div>` element that
-  contains the rendered diff
+  contains the whole rendered diff, i.e. the top level `div`
   * Defaults to `diff`
 
 
