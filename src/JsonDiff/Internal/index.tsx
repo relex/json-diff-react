@@ -4,11 +4,9 @@
 // Exports types.
 
 import { roundObj } from './utils';
-
-// @ts-ignore
 import JsonDiff from './json-diff';
 
-const { colorize } = require('./colorize');
+import { colorize } from './colorize';
 
 // Import types from DefinitelyTyped
 import * as JsonDiffTypes from 'json-diff';
@@ -46,7 +44,7 @@ export function diff(
 
   // quick fix to outdated type definition in DefinitelyTyped: added excludeKeys
   options: DiffOptions = {}
-): any {
+): unknown {
   if (options.precision !== undefined) {
     obj1 = roundObj(obj1, options.precision);
     obj2 = roundObj(obj2, options.precision);

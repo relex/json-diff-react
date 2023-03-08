@@ -1,5 +1,4 @@
 import { diffRender, JsonValue, DiffOptions, StyleCustomization } from './JsonDiff/Internal/index';
-import React from 'react';
 
 // Default style customization only sets class names to their default values.
 const defaultStyleCustomization: StyleCustomization = {

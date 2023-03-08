@@ -10,9 +10,10 @@
 2. Remember to add unit tests
 3. Run unit tests with `npm test` and make sure all tests pass
 4. Reformat the code with `npm run prettier`
-4. Recompile the TypeScript code with `npm run build`
-5. Create a Pull Request on the repository
-6. One of the maintainers will review the code and publish the changes on NPM
+5. Run the linter with `npm run lint` and fix any warnings
+6. Recompile the TypeScript code with `npm run build`
+7. Create a Pull Request on the repository
+8. One of the maintainers will review the code and publish the changes on NPM
 
 ## About the repository
 
