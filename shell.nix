@@ -3,7 +3,6 @@
 
 pkgs.mkShell {
   nativeBuildInputs = [
-    pkgs.nodePackages.create-react-app
     pkgs.nodejs
   ];
 }
