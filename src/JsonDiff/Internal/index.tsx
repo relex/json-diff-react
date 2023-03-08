@@ -46,8 +46,7 @@ export function diff(
 
   // quick fix to outdated type definition in DefinitelyTyped: added excludeKeys
   options: DiffOptions = {}
-  ): any {
-
+): any {
   if (options.precision !== undefined) {
     obj1 = roundObj(obj1, options.precision);
     obj2 = roundObj(obj2, options.precision);

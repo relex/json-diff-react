@@ -13,11 +13,7 @@ const runSnapshotTest = (
 ) => {
   const tree = renderer
     .create(
-      <JsonDiffComponent
-        jsonA={jsonA}
-        jsonB={jsonB}
-        styleCustomization={styleCustomization}
-      />
+      <JsonDiffComponent jsonA={jsonA} jsonB={jsonB} styleCustomization={styleCustomization} />
     )
     .toJSON();
 
