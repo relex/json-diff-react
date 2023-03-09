@@ -4,5 +4,6 @@
 pkgs.mkShell {
   nativeBuildInputs = [
     pkgs.nodejs
+    pkgs.git # Used in CI
   ];
 }
