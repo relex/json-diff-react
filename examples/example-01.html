@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <style>
+      body {
+        background: white;
+        color: black;
+      }
+
+      .deletion {
+        color: red;
+      }
+
+      .addition {
+        color: green;
+      }
+
+      .unchanged {
+        color: gray;
+      }
+
+      .diff {
+        font-family: monospace;
+        white-space: pre;
+        border: 1px solid gray;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./json-diff-react.bundle.js"></script>
+
+    <script type="text/babel">
+      const { JsonDiffComponent } = window['json-diff-react'];
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+
+      const a = { foo: 123, bar: 456, baz: 789 };
+      const b = { foo: 123, test: 'hello', baz: 789 };
+
+      const App = () => <div>
+        <h1>JSON diff</h1>
+        <p>A really simple example.</p>
+        <JsonDiffComponent jsonA={a} jsonB={b} />
+      </div>;
+
+      root.render(<App/>);
+    </script>
+  </body>
+</html>
