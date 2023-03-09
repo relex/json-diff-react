@@ -3,7 +3,7 @@
 // The 'colorize' function was adapted from console rendering to browser
 // rendering - it now returns a JSX.Element.
 
-import { extendedTypeOf } from './utils';
+import { extendedTypeOf, elisionMarker } from './utils';
 import React from 'react';
 
 const subcolorizeToCallback = function (options, key, diff, output, color, indent) {
@@ -29,9 +29,23 @@ const subcolorizeToCallback = function (options, key, diff, output, color, inden
         return subcolorizeToCallback(options, key, diff.__new, output, '+', indent);
       } else {
         output(color, `${indent}${prefix}{`);
+
+        // Elisions are added in “json-diff” module depending on the option.
+        let elisionCount = 0;
+
         for (const subkey of Object.keys(diff)) {
           let m;
           subvalue = diff[subkey];
+
+          // Handle elisions
+          if (subvalue === elisionMarker) {
+            elisionCount++;
+            continue;
+          } else if (elisionCount > 0) {
+            outputElisions(1);
+            elisionCount = 0;
+          }
+
           if ((m = subkey.match(/^(.*)__deleted$/))) {
             subcolorizeToCallback(options, m[1], subvalue, output, '-', subindent);
           } else if ((m = subkey.match(/^(.*)__added$/))) {
@@ -40,6 +54,10 @@ const subcolorizeToCallback = function (options, key, diff, output, color, inden
             subcolorizeToCallback(options, subkey, subvalue, output, color, subindent);
           }
         }
+
+        // Handle elisions
+        if (elisionCount > 0) outputElisions(1);
+
         return output(color, `${indent}}`);
       }
 

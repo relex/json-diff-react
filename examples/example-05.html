@@ -129,6 +129,12 @@
         <p>A demo that shows how to add plus and minus signs using CSS styles.</p>
         <JsonDiffComponent jsonA={a} jsonB={b} />
 
+        <p>
+          No elisions for objects (original behavior of <b>json-diff</b> library,{' '}
+          <code>{'jsonDiffOptions={{ showElisionsForObjects: false }}'}</code>).
+        </p>
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ showElisionsForObjects: false }} />
+
         <p>A fuller diff (<code>{'jsonDiffOptions={{ full: true }}'}</code>).</p>
         <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ full: true }} />
 
