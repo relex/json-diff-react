@@ -13,7 +13,12 @@ const runSnapshotTest = (
 ) => {
   const tree = renderer
     .create(
-      <JsonDiffComponent jsonA={jsonA} jsonB={jsonB} styleCustomization={styleCustomization} />
+      <JsonDiffComponent
+        jsonA={jsonA}
+        jsonB={jsonB}
+        styleCustomization={styleCustomization}
+        jsonDiffOptions={{ showElisionsForObjects: false }}
+      />
     )
     .toJSON();
 
@@ -96,7 +101,13 @@ describe('<JsonDiffComponent />', () => {
       fc.property(fc.json(), (json) => {
         const parsedJson = JSON.parse(json);
         const tree = renderer
-          .create(<JsonDiffComponent jsonA={parsedJson} jsonB={parsedJson} />)
+          .create(
+            <JsonDiffComponent
+              jsonA={parsedJson}
+              jsonB={parsedJson}
+              jsonDiffOptions={{ showElisionsForObjects: false }}
+            />
+          )
           .toJSON();
 
         expect(tree).toMatchInlineSnapshot(`
