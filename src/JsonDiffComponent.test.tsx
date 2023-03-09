@@ -103,9 +103,7 @@ describe('<JsonDiffComponent />', () => {
           <div
             className="diff"
             style={null}
-          >
-            <pre />
-          </div>
+          />
         `);
       })
     );
