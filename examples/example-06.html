@@ -144,9 +144,9 @@
 
         <p>
           The same demo but with shrinked elisions
-          (<code>{'jsonDiffOptions={{ maxElisions: true }}'}</code>).
+          (<code>{'jsonDiffOptions={{ maxElisions: 1 }}'}</code>).
         </p>
-        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ maxElisions: true }} />
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ maxElisions: 1 }} />
 
         <p>
           No elisions for objects (original behavior of <b>json-diff</b> library,{' '}
