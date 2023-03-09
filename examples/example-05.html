@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <style>
+      body {
+        background: white;
+        color: black;
+      }
+
+      .deletion {
+        position: relative;
+        color: red;
+      }
+
+      .addition {
+        position: relative;
+        color: green;
+      }
+
+      .deletion::before,
+      .addition::before {
+        display: block;
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-left: -10px;
+      }
+
+      .deletion::before {
+        content: '-';
+      }
+
+      .addition::before {
+        content: '+';
+      }
+
+      .unchanged {
+        color: gray;
+      }
+
+      .diff {
+        font-family: monospace;
+        white-space: pre;
+        border: 1px solid gray;
+        padding: 10px 10px 10px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./json-diff-react.bundle.js"></script>
+
+    <script type="text/babel">
+      const { JsonDiffComponent } = window['json-diff-react'];
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+
+      // These JSON example was taken from this page https://en.wikipedia.org/wiki/JSON
+      const a = {
+        "firstName": "John",
+        "lastName": "Smith",
+        "isAlive": true,
+        "age": 27,
+        "address": {
+          "streetAddress": "21 2nd Street",
+          "city": "New York",
+          "state": "NY",
+          "postalCode": "10021-3100"
+        },
+        "phoneNumbers": [
+          {
+            "type": "home",
+            "number": "212 555-1234"
+          },
+          {
+            "type": "office",
+            "number": "646 555-4567"
+          }
+        ],
+        "children": [
+          "Catherine",
+          "Thomas",
+          "Trevor"
+        ],
+        "spouse": null
+      };
+
+      // Slight modifications of JSON in “a”
+      const b = {
+        "firstName": "John",
+        "lastName": "Smith",
+        "isAlive": true,
+        "age": 27,
+        "address": {
+          "streetAddress": "21 2nd Street",
+          "city": "New York",
+          "state": "NY",
+          "postalCode": "10021-3100"
+        },
+        "phoneNumbers": [
+          {
+            "type": "cellphone",
+            "number": "212 555-1234"
+          },
+          {
+            "type": "office",
+            "number": "646 555-4567"
+          }
+        ],
+        "children": [
+          "Catherine",
+          "John",
+          "Trevor"
+        ],
+        "spouse": null
+      };
+
+      const App = () => <div>
+        <h1>JSON diff</h1>
+
+        <p>A demo that shows how to add plus and minus signs using CSS styles.</p>
+        <JsonDiffComponent jsonA={a} jsonB={b} />
+
+        <p>A fuller diff.</p>
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ full: true }} />
+      </div>;
+
+      root.render(<App/>);
+    </script>
+  </body>
+</html>
