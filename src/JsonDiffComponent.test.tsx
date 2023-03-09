@@ -11,7 +11,7 @@ const runSnapshotTest = (
   jsonB: JsonValue,
   styleCustomization: Partial<StyleCustomization>,
   inlineSnapshotWithElisions?: string,
-  inlineSnapshotWithoutElisions?: string, // Original json-diff behavior
+  inlineSnapshotWithoutElisions?: string // Original json-diff behavior
 ) => {
   // Original json-diff behavior
   {
@@ -37,11 +37,7 @@ const runSnapshotTest = (
   {
     const tree = renderer
       .create(
-        <JsonDiffComponent
-          jsonA={jsonA}
-          jsonB={jsonB}
-          styleCustomization={styleCustomization}
-        />
+        <JsonDiffComponent jsonA={jsonA} jsonB={jsonB} styleCustomization={styleCustomization} />
       )
       .toJSON();
 
