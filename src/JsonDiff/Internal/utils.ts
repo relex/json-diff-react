@@ -27,3 +27,11 @@ export const roundObj = function (data: any, precision: number) {
     return data;
   }
 };
+
+// A hacky marker for “...” elisions for object keys.
+// This feature wasn’t present in the original “json-diff” library.
+// A unique identifier used as a value for the “elisioned” object keys.
+//
+// Read more about “Symbol”s here:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+export const elisionMarker = Symbol('json-diff-react--elision-marker');

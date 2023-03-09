@@ -7,10 +7,13 @@
 // replaced by 'diffRender' which returns a JSX Element. The functionality of
 // 'diffRender' is tested indirectly in 'JsonDiffComponent.test.tsx'.
 
-import { diff } from './index';
+import { diff as originalDiff } from './index';
 const assert = require('assert');
 
 export {};
+
+// Original “diff” behavior from json-diff library.
+const diff = (a, b, options) => originalDiff(a, b, { showElisionsForObjects: false, ...options });
 
 describe('diff', function () {
   describe('with simple scalar values', function () {

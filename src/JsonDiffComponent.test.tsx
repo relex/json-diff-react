@@ -9,15 +9,44 @@ import { JsonValue, JsonDiffComponent, StyleCustomization } from './JsonDiffComp
 const runSnapshotTest = (
   jsonA: JsonValue,
   jsonB: JsonValue,
-  styleCustomization: Partial<StyleCustomization>
+  styleCustomization: Partial<StyleCustomization>,
+  inlineSnapshotWithElisions?: string,
+  inlineSnapshotWithoutElisions?: string // Original json-diff behavior
 ) => {
-  const tree = renderer
-    .create(
-      <JsonDiffComponent jsonA={jsonA} jsonB={jsonB} styleCustomization={styleCustomization} />
-    )
-    .toJSON();
+  // Original json-diff behavior
+  {
+    const tree = renderer
+      .create(
+        <JsonDiffComponent
+          jsonA={jsonA}
+          jsonB={jsonB}
+          styleCustomization={styleCustomization}
+          jsonDiffOptions={{ showElisionsForObjects: false }}
+        />
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    if (inlineSnapshotWithoutElisions != null) {
+      expect(tree).toMatchInlineSnapshot(inlineSnapshotWithoutElisions);
+    } else {
+      expect(tree).toMatchSnapshot();
+    }
+  }
+
+  // With elisions for objects
+  {
+    const tree = renderer
+      .create(
+        <JsonDiffComponent jsonA={jsonA} jsonB={jsonB} styleCustomization={styleCustomization} />
+      )
+      .toJSON();
+
+    if (inlineSnapshotWithElisions != null) {
+      expect(tree).toMatchInlineSnapshot(inlineSnapshotWithElisions);
+    } else {
+      expect(tree).toMatchSnapshot();
+    }
+  }
 };
 
 const runSimpleSnapshotTest = (jsonA: JsonValue, jsonB: JsonValue) => {
@@ -95,16 +124,15 @@ describe('<JsonDiffComponent />', () => {
     fc.assert(
       fc.property(fc.json(), (json) => {
         const parsedJson = JSON.parse(json);
-        const tree = renderer
-          .create(<JsonDiffComponent jsonA={parsedJson} jsonB={parsedJson} />)
-          .toJSON();
 
-        expect(tree).toMatchInlineSnapshot(`
+        const inlineSnapshot = `
           <div
             className="diff"
             style={null}
           />
-        `);
+        `;
+
+        runSnapshotTest(parsedJson, parsedJson, {}, inlineSnapshot, inlineSnapshot);
       })
     );
   });

@@ -174,6 +174,7 @@ export interface DiffOptions {
   maxElisions?: number;
   precision?: number;
   excludeKeys?: string[];
+  showElisionsForObjects?: boolean;
 }
 ```
 
@@ -186,6 +187,10 @@ https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/i
 N.B. I added the `excludeKeys` attribute to the `DiffOptions` imported from
 `DefinitelyTyped`. It appears like the type definitions in `DefinitelyTyped`
 are outdated.
+
+N.B. `showElisionsForObjects` option was not part of the original [json-diff] library.
+It was added only for this library. It’s turned on by default.
+It renders elisions like `...` for objects in the similar way it’s done for arrays.
 
 ## Authors
 

@@ -1,13 +1,17 @@
 // This is copied from 'json-diff' package ('lib/index.js') with minor
 // modifications.
 
-import { extendedTypeOf } from './utils';
+import { extendedTypeOf, elisionMarker } from './utils';
 import { SequenceMatcher } from '@ewoudenberg/difflib';
 
 export default class JsonDiff {
   constructor(options) {
     options.outputKeys = options.outputKeys || [];
     options.excludeKeys = options.excludeKeys || [];
+
+    // Rendering ”...” elisions in the same way as for arrays
+    options.showElisionsForObjects = options.showElisionsForObjects ?? true;
+
     this.options = options;
   }
 
@@ -55,6 +59,8 @@ export default class JsonDiff {
           equal = false;
         } else if (this.options.full || this.options.outputKeys.includes(key)) {
           result[key] = value1;
+        } else if (this.options.showElisionsForObjects) {
+          result[key] = elisionMarker;
         }
         // console.log(`key ${key} change.score=${change.score} ${change.result}`)
         score += Math.min(20, Math.max(-10, change.score / 5)); // BATMAN!

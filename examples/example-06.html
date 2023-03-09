@@ -10,31 +10,11 @@
       }
 
       .deletion {
-        position: relative;
         color: red;
       }
 
       .addition {
-        position: relative;
         color: green;
-      }
-
-      .deletion::before,
-      .addition::before {
-        display: block;
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        margin-left: -10px;
-      }
-
-      .deletion::before {
-        content: '-';
-      }
-
-      .addition::before {
-        content: '+';
       }
 
       .unchanged {
@@ -45,7 +25,7 @@
         font-family: monospace;
         white-space: pre;
         border: 1px solid gray;
-        padding: 10px 10px 10px 20px;
+        padding: 10px;
       }
     </style>
   </head>
@@ -64,6 +44,7 @@
       const root = ReactDOM.createRoot(container);
 
       // These JSON example was taken from this page https://en.wikipedia.org/wiki/JSON
+      // And modified.
       const a = {
         "firstName": "John",
         "lastName": "Smith",
@@ -79,6 +60,22 @@
           {
             "type": "home",
             "number": "212 555-1234"
+          },
+          {
+            "type": "cellphone",
+            "number": "111 111-1111"
+          },
+          {
+            "type": "another cellphone",
+            "number": "111 222-1111"
+          },
+          {
+            "type": "friend",
+            "number": "222 222-2222"
+          },
+          {
+            "type": "mother",
+            "number": "333 333-333"
           },
           {
             "type": "office",
@@ -107,8 +104,24 @@
         },
         "phoneNumbers": [
           {
-            "type": "cellphone",
+            "type": "home",
             "number": "212 555-1234"
+          },
+          {
+            "type": "cellphone",
+            "number": "111 111-1111"
+          },
+          {
+            "type": "another cellphone",
+            "number": "111 222-1111"
+          },
+          {
+            "type": "friend",
+            "number": "222 555-5555"
+          },
+          {
+            "type": "mother",
+            "number": "333 333-333"
           },
           {
             "type": "office",
@@ -126,8 +139,14 @@
       const App = () => <div>
         <h1>JSON diff</h1>
 
-        <p>A demo that shows how to add plus and minus signs using CSS styles.</p>
+        <p>A demo that demonstrates elisions in details.</p>
         <JsonDiffComponent jsonA={a} jsonB={b} />
+
+        <p>
+          The same demo but with shrinked elisions
+          (<code>{'jsonDiffOptions={{ maxElisions: 1 }}'}</code>).
+        </p>
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ maxElisions: 1 }} />
 
         <p>
           No elisions for objects (original behavior of <b>json-diff</b> library,{' '}
