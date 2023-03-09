@@ -37,19 +37,19 @@ export type JsonValue =
 
 export function diff(
   // using 'unknown' type to keep this compatible with the old json-diff unit tests
-  obj1: unknown,
+  jsonA: unknown,
 
   // using 'unknown' type to keep this compatible with the old json-diff unit tests
-  obj2: unknown,
+  jsonB: unknown,
 
   // quick fix to outdated type definition in DefinitelyTyped: added excludeKeys
   options: DiffOptions = {}
 ): unknown {
   if (options.precision !== undefined) {
-    obj1 = roundObj(obj1, options.precision);
-    obj2 = roundObj(obj2, options.precision);
+    jsonA = roundObj(jsonA, options.precision);
+    jsonB = roundObj(jsonB, options.precision);
   }
-  return new JsonDiff(options).diff(obj1, obj2).result;
+  return new JsonDiff(options).diff(jsonA, jsonB).result;
 }
 
 export function diffRender(
