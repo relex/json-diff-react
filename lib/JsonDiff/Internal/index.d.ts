@@ -13,6 +13,7 @@ export type StyleCustomization = {
 };
 export type DiffOptions = JsonDiffTypes.DiffOptions & {
     excludeKeys?: string[];
+    showElisionsForObjects?: boolean;
 };
 export type JsonValue = {
     [x: string]: JsonValue;

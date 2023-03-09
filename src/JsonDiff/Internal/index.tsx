@@ -26,7 +26,7 @@ export type StyleCustomization = {
 
 // Definition of 'DiffOptions' in DefinitelyTyped is outdated.
 export type DiffOptions = JsonDiffTypes.DiffOptions & {
-  excludeKeys?: string[]
+  excludeKeys?: string[];
 
   // This was implemented as part of this library. It’s turned on by default.
   // It renders elisions like `...` for objects in the similar way it’s done for arrays.
