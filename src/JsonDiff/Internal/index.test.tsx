@@ -7,9 +7,8 @@
 // replaced by 'diffRender' which returns a JSX Element. The functionality of
 // 'diffRender' is tested indirectly in 'JsonDiffComponent.test.tsx'.
 
-const path = require('path');
-const assert = require('assert');
 import { diff } from './index';
+const assert = require('assert');
 
 export {};
 

@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 
 // A simple bundle of “json-diff-react” library to use for examples.
