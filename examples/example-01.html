@@ -48,8 +48,12 @@
 
       const App = () => <div>
         <h1>JSON diff</h1>
+
         <p>A really simple example.</p>
         <JsonDiffComponent jsonA={a} jsonB={b} />
+
+        <p>The same example with <code>{'jsonDiffOptions={{ full: true }}'}</code>.</p>
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ full: true }} />
       </div>;
 
       root.render(<App/>);
