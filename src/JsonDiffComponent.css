@@ -1,15 +1,22 @@
+/* An example of CSS styles for the <JsonDiffComponent> */
+
 .deletion {
-  /* customization for deleted lines (div) */
+  /* customization for deleted lines (<div>) */
+  color: red;
 }
 
 .addition {
-  /* customization for added lines (div) */
+  /* customization for added lines (<div>) */
+  color: green;
 }
 
 .unchanged {
-  /* customization for unchanged lines (div) */
+  /* customization for unchanged lines (<div>) */
+  color: gray;
 }
 
 .diff {
   /* customization for the top-level <div> wrapper that contains the diff */
+  font-family: monospace;
+  white-space: pre;
 }
