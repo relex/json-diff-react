@@ -3,7 +3,7 @@
 ## How to load dependencies?
 
 1. If you are a [Nix] user, enter nix-shell with `nix-shell`
-   - That add the NPM package manager to your shell environment
+   - That adds the NPM package manager to your shell environment
 2. Install NPM package dependencies with `npm install` inside that shell
 
 ## How to contribute?
