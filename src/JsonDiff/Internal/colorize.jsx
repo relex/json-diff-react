@@ -105,10 +105,10 @@ const colorizeToCallback = (diff, options, output) =>
 export const colorize = function (diff, options = {}, customization) {
   const output = [];
 
-  let className;
-  let style;
-
   colorizeToCallback(diff, options, function (color, line) {
+    let className;
+    let style;
+
     if (color === ' ') {
       className = customization.unchangedClassName;
       style = customization.unchangedLineStyle;
