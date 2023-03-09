@@ -42,7 +42,7 @@ const subcolorizeToCallback = function (options, key, diff, output, color, inden
             elisionCount++;
             continue;
           } else if (elisionCount > 0) {
-            outputElisions(1);
+            outputElisions(elisionCount);
             elisionCount = 0;
           }
 
