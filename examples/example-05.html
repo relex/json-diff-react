@@ -129,8 +129,11 @@
         <p>A demo that shows how to add plus and minus signs using CSS styles.</p>
         <JsonDiffComponent jsonA={a} jsonB={b} />
 
-        <p>A fuller diff.</p>
+        <p>A fuller diff (<code>{'jsonDiffOptions={{ full: true }}'}</code>).</p>
         <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ full: true }} />
+
+        <p>A bit more expanded diff (<code>{'jsonDiffOptions={{ keepUnchangedValues: true }}'}</code>).</p>
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ keepUnchangedValues: true }} />
       </div>;
 
       root.render(<App/>);
