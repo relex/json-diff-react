@@ -17,5 +17,5 @@ export type DiffOptions = JsonDiffTypes.DiffOptions & {
 export type JsonValue = {
     [x: string]: JsonValue;
 } | Array<JsonValue> | string | number | boolean | null;
-export declare function diff(obj1: unknown, obj2: unknown, options?: DiffOptions): unknown;
+export declare function diff(jsonA: unknown, jsonB: unknown, options?: DiffOptions): unknown;
 export declare function diffRender(jsonA: JsonValue, jsonB: JsonValue, options: DiffOptions | undefined, customization: StyleCustomization): JSX.Element;

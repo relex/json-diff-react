@@ -7,7 +7,7 @@ export declare function mkCustomization(customizations: Partial<StyleCustomizati
  * @param {Object} props - properties of the component
  * @param {JsonValue} props.jsonA - parsed JSON value (fed to diff)
  * @param {JsonValue} props.jsonB - parsed JSON value (fed to diff)
- * @param {Partial<StyleCustomization>=} props.styleCustomization
+ * @param {Partial<StyleCustomization>} props.styleCustomization
  * @param {DiffOptions} props.jsonDiffOptions - properties passed to json-diff
  */
 export declare function JsonDiffComponent(props: {
