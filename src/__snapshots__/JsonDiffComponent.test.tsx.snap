@@ -44,7 +44,149 @@ exports[`<JsonDiffComponent /> it should render correctly (array vs array) 1`] =
 </div>
 `;
 
+exports[`<JsonDiffComponent /> it should render correctly (array vs array) 2`] = `
+<div
+  className="diff"
+  style={null}
+>
+  <div
+    className="unchanged"
+    style={null}
+  >
+    [
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      ...
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      ...
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      ...
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      4
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+    ]
+  </div>
+</div>
+`;
+
 exports[`<JsonDiffComponent /> it should render correctly (object vs array) 1`] = `
+<div
+  className="diff"
+  style={null}
+>
+  <div
+    className="deletion"
+    style={null}
+  >
+    {
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+      key1: "value1"
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+      key2: 123
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+      key3: [
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+        1
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+        2
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+        3
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+      ]
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+    }
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+    [
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      1
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      2
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      3
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      4
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+    ]
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> it should render correctly (object vs array) 2`] = `
 <div
   className="diff"
   style={null}
@@ -210,6 +352,80 @@ exports[`<JsonDiffComponent /> it should render correctly (objects vs object) 1`
 </div>
 `;
 
+exports[`<JsonDiffComponent /> it should render correctly (objects vs object) 2`] = `
+<div
+  className="diff"
+  style={null}
+>
+  <div
+    className="unchanged"
+    style={null}
+  >
+    {
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+      key1: "value1"
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      key1: "value"
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      ...
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      key3: [
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+        ...
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+        ...
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+        ...
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+        4
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      ]
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+    }
+  </div>
+</div>
+`;
+
 exports[`<JsonDiffComponent /> should pick up CSS classes from styleCustomization 1`] = `
 <div
   className="custom_frame_class"
@@ -232,6 +448,80 @@ exports[`<JsonDiffComponent /> should pick up CSS classes from styleCustomizatio
     style={null}
   >
       key1: "value"
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+      key3: [
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+        ...
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+        ...
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+        ...
+  </div>
+  <div
+    className="custom_addition_class"
+    style={null}
+  >
+        4
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+      ]
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+    }
+  </div>
+</div>
+`;
+
+exports[`<JsonDiffComponent /> should pick up CSS classes from styleCustomization 2`] = `
+<div
+  className="custom_frame_class"
+  style={null}
+>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+    {
+  </div>
+  <div
+    className="custom_deletion_class"
+    style={null}
+  >
+      key1: "value1"
+  </div>
+  <div
+    className="custom_addition_class"
+    style={null}
+  >
+      key1: "value"
+  </div>
+  <div
+    className="custom_unchanged_class"
+    style={null}
+  >
+      ...
   </div>
   <div
     className="custom_unchanged_class"
@@ -390,7 +680,136 @@ exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization
 </div>
 `;
 
+exports[`<JsonDiffComponent /> should pick up CSS styles from styleCustomization 2`] = `
+<div
+  className="diff"
+  style={
+    {
+      "backgroundColor": "black",
+    }
+  }
+>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+    {
+  </div>
+  <div
+    className="deletion"
+    style={
+      {
+        "lineHeight": 2,
+      }
+    }
+  >
+      key1: "value1"
+  </div>
+  <div
+    className="addition"
+    style={
+      {
+        "lineHeight": 1,
+      }
+    }
+  >
+      key1: "value"
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+      ...
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+      key3: [
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+        ...
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+        ...
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+        ...
+  </div>
+  <div
+    className="addition"
+    style={
+      {
+        "lineHeight": 1,
+      }
+    }
+  >
+        4
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+      ]
+  </div>
+  <div
+    className="unchanged"
+    style={
+      {
+        "lineHeight": 3,
+      }
+    }
+  >
+    }
+  </div>
+</div>
+`;
+
 exports[`<JsonDiffComponent /> should return an empty div if there are no changes (snapshot) 1`] = `
+<div
+  className="diff"
+  style={null}
+/>
+`;
+
+exports[`<JsonDiffComponent /> should return an empty div if there are no changes (snapshot) 2`] = `
 <div
   className="diff"
   style={null}
