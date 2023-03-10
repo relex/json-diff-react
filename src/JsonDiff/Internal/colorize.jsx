@@ -11,14 +11,20 @@ const subcolorizeToCallback = function (options, key, diff, output, color, inden
   const prefix = key ? `${key}: ` : '';
   const subindent = indent + '  ';
 
+  const maxElisions = options.maxElisions === undefined ? Infinity : options.maxElisions;
+
+  const renderElision =
+    options.renderElision ??
+    ((n, max) => (n < max ? [...Array(n)].map(() => '...') : `... (${n} entries)`));
+
   const outputElisions = (n) => {
-    const maxElisions = options.maxElisions === undefined ? Infinity : options.maxElisions;
-    if (n < maxElisions) {
-      for (let i = 0; i < n; i++) {
-        output(' ', subindent + '...');
-      }
+    const elisions = renderElision(n, maxElisions);
+    if (typeof elisions === 'string') {
+      output(' ', subindent + elisions);
     } else {
-      output(' ', subindent + `... (${n} entries)`);
+      elisions.forEach((x) => {
+        output(' ', subindent + x);
+      });
     }
   };
 

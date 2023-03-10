@@ -31,6 +31,22 @@ export type DiffOptions = JsonDiffTypes.DiffOptions & {
   // This was implemented as part of this library. It’s turned on by default.
   // It renders elisions like `...` for objects in the similar way it’s done for arrays.
   showElisionsForObjects?: boolean;
+
+  // This option was added only to this library. It wasn’t a part of original json-diff library.
+  // It allows you to customize “...”/“... (N entries)” template.
+  // Can also be useful to support localizations other than English.
+  //
+  // Arguments:
+  // - “elisionCount” is a counter of how many elisions were in a row (1 is minimal).
+  // - “maxElisions” is forwarded from these options (“Infinity” by default).
+  // Return value is either:
+  // - A “string” — For instance a single ”...” or “... (5 entries)” when exceeded “maxElisions”
+  // - A list of “string”s — Multiple elisions to render (e.g. “['...', '...', '...']”)
+  // It’s totally fine to return a list of one value (e.g. “['... (5 entries)']”).
+  //
+  // Defaults to:
+  // (n, max) => (n < max ? [...Array(n)].map(() => '...') : `... (${n} entries)`)
+  renderElision?: (elisionCount: number, maxElisions: number) => string | string[];
 };
 
 export type JsonValue =

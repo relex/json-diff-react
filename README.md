@@ -175,6 +175,7 @@ export interface DiffOptions {
   precision?: number;
   excludeKeys?: string[];
   showElisionsForObjects?: boolean;
+  renderElision?: (elisionCount: number, maxElisions: number) => string | string[];
 }
 ```
 
@@ -191,6 +192,11 @@ are outdated.
 N.B. `showElisionsForObjects` option was not part of the original [json-diff] library.
 It was added only for this library. It’s turned on by default.
 It renders elisions like `...` for objects in the similar way it’s done for arrays.
+
+N.B. `renderElision` option was added only to this library.
+It wasn’t a part of original [json-diff] library.
+It allows you to customize “...”/“... (N entries)” template.
+Can also be useful to support localizations other than English.
 
 ## Authors
 
