@@ -14,6 +14,7 @@ export type StyleCustomization = {
 export type DiffOptions = JsonDiffTypes.DiffOptions & {
     excludeKeys?: string[];
     showElisionsForObjects?: boolean;
+    renderElision?: (elisionCount: number, maxElisions: number) => string | string[];
 };
 export type JsonValue = {
     [x: string]: JsonValue;
