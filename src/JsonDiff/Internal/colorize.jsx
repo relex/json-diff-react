@@ -56,7 +56,7 @@ const subcolorizeToCallback = function (options, key, diff, output, color, inden
         }
 
         // Handle elisions
-        if (elisionCount > 0) outputElisions(1);
+        if (elisionCount > 0) outputElisions(elisionCount);
 
         return output(color, `${indent}}`);
       }
