@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JsonDiffComponent: Interactive example</title>
+
+    <style>
+      body {
+        background: white;
+        color: black;
+      }
+
+      .deletion {
+        position: relative;
+        color: red;
+      }
+
+      .addition {
+        position: relative;
+        color: green;
+      }
+
+      .deletion::before,
+      .addition::before {
+        display: block;
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-left: -10px;
+      }
+
+      .deletion::before {
+        content: '-';
+      }
+
+      .addition::before {
+        content: '+';
+      }
+
+      .unchanged {
+        color: gray;
+      }
+
+      .diff,
+      textarea {
+        font-family: monospace;
+        white-space: pre;
+        border: 1px solid gray;
+        padding: 10px 10px 10px 20px;
+      }
+
+      textarea {
+        background: white;
+        color: black;
+        padding: 10px;
+        margin: 0;
+      }
+
+      .json-inputs {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .json-inputs > * {
+        flex: 50%;
+        height: 450px;
+        margin-right: 5px;
+      }
+
+      .json-inputs > * + * {
+        margin-left: 5px;
+        margin-right: 0;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./json-diff-react.bundle.js"></script>
+
+    <script type="text/babel">
+      // These JSON example was taken from this page https://en.wikipedia.org/wiki/JSON
+      const wikipediaJsonExample = {
+        "firstName": "John",
+        "lastName": "Smith",
+        "isAlive": true,
+        "age": 27,
+        "address": {
+          "streetAddress": "21 2nd Street",
+          "city": "New York",
+          "state": "NY",
+          "postalCode": "10021-3100"
+        },
+        "phoneNumbers": [
+          {
+            "type": "home",
+            "number": "212 555-1234"
+          },
+          {
+            "type": "office",
+            "number": "646 555-4567"
+          }
+        ],
+        "children": [
+          "Catherine",
+          "Thomas",
+          "Trevor"
+        ],
+        "spouse": null
+      };
+
+      const secondJsonExample = {
+        ...wikipediaJsonExample,
+        "age": 30,
+        "phoneNumbers": [
+          {
+            "type": "cellphone",
+            "number": "212 555-1234"
+          },
+          {
+            "type": "office",
+            "number": "646 555-4567"
+          }
+        ],
+        "children": [
+          "Catherine",
+          "John",
+          "Trevor"
+        ]
+      };
+
+      const { JsonDiffComponent } = window['json-diff-react'];
+
+      const Diff = ({ a, b }) => <JsonDiffComponent
+        jsonA={a}
+        jsonB={b}
+        jsonDiffOptions={{
+          maxElisions: 2,
+          renderElision:
+            (n, max) => (n < max) ? [...Array(n)].map(() => '…') : `… (${n} entries)`
+        }}
+      />
+
+      const App = () => {
+        const [jsonAInput, setJsonAInput] =
+          React.useState(JSON.stringify(wikipediaJsonExample, null, 2));
+        const [jsonBInput, setJsonBInput] =
+          React.useState(JSON.stringify(secondJsonExample, null, 2));
+
+        let error: string | null = null
+
+        let jsonA = null
+        try {
+          jsonA = JSON.parse(jsonAInput);
+        } catch (e) {
+          error = `Failed to parse JSON A: ${e?.message ?? JSON.stringify(e)}`;
+        }
+
+        let jsonB = null
+        try {
+          jsonB = JSON.parse(jsonBInput);
+        } catch (e) {
+          error = `Failed to parse JSON B: ${e?.message ?? JSON.stringify(e)}`;
+        }
+
+        return <>
+          <h1>JsonDiffComponent: Interactive example</h1>
+
+          <div className="json-inputs">
+            <textarea value={jsonAInput} onChange={e => setJsonAInput(e.target.value)} />
+            <textarea value={jsonBInput} onChange={e => setJsonBInput(e.target.value)} />
+          </div>
+
+          {error !== null ? <p className="error">{error}</p> : <Diff a={jsonA} b={jsonB} />}
+        </>;
+      };
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App/>);
+    </script>
+  </body>
+</html>
