@@ -8,7 +8,9 @@ This is a fork of [json-diff] with all of the dependencies towards Node.js core 
 Code from [json-diff] can be found under `src/JsonDiff/Internal` and it’s mostly unchanged — expect
 for the `colorize` module which now returns a JSX element instead of a string.
 
-![Example of the React component](example.png)
+Here is a screenshot of the [interactive demo](examples/example-07.html):
+
+![A screenshot of the React component example](screenshot.png)
 
 ## Simple example
 
@@ -175,13 +177,14 @@ export interface DiffOptions {
   precision?: number;
   excludeKeys?: string[];
   showElisionsForObjects?: boolean;
+  renderElision?: (elisionCount: number, maxElisions: number) => string | string[];
 }
 ```
 
 All of the fields are optional. Consult the original [json-diff] library to
 learn more about how the options impact the output.
 
-Most of this type came from
+Most of the `DiffOptions` type came from
 https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/index.d.ts.
 
 N.B. I added the `excludeKeys` attribute to the `DiffOptions` imported from
@@ -191,6 +194,11 @@ are outdated.
 N.B. `showElisionsForObjects` option was not part of the original [json-diff] library.
 It was added only for this library. It’s turned on by default.
 It renders elisions like `...` for objects in the similar way it’s done for arrays.
+
+N.B. `renderElision` option was added only to this library.
+It wasn’t a part of original [json-diff] library.
+It allows you to customize “...”/“... (N entries)” template.
+Can also be useful to support localizations other than English.
 
 ## Authors
 
