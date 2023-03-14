@@ -17,15 +17,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v2.4.0
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v15
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v19
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            system-features = nixos-test benchmark big-parallel kvm
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run all CI checks
         run: |
-          ci-support/all.sh
+          nix-shell --pure --run ci-support/all.sh

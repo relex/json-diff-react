@@ -1,5 +1,8 @@
 #! /usr/bin/env bash
 
+# You are supposed to run this script from the project root like this:
+# nix-shell --pure --run ci-support/all.sh
+
 set -o errexit || exit
 set -o nounset
 set -o pipefail
@@ -7,11 +10,22 @@ set -o pipefail
 SCRIPT_DIR=$(dirname -- "${BASH_SOURCE[0]}")
 cd -- "$SCRIPT_DIR/.." # Go to project root
 
->&2 echo 'Running all CI scripts...'
+echo 'Running all CI scripts...'
 
 # Log helpers
 success() { echo; echo '[ SUCCESS ]'; echo; }
 failure() { >&2 echo; >&2 echo '[ FAILURE ]'; >&2 echo; }
+
+(
+  echo 'Installing NPM dependencies first...'
+  npm_install_exit_code=0
+  (set -o xtrace; npm install) || npm_install_exit_code=$?
+  if (( npm_install_exit_code != 0 )); then
+    >&2 printf '\nFailed with exit code: %d\n' "$npm_install_exit_code"
+    failure
+    exit "$npm_install_exit_code"
+  fi
+)
 
 # Key-value set aka associative array
 declare -A exit_codes
