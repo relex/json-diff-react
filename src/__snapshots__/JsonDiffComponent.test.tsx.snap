@@ -1,5 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<JsonDiffComponent /> custom elisions renderer works 1`] = `
+<div
+  className="diff"
+  style={null}
+>
+  <div
+    className="unchanged"
+    style={null}
+  >
+    {
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      … (3)
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+      age: 27
+  </div>
+  <div
+    className="addition"
+    style={null}
+  >
+      age: 30
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      …
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      phoneNumbers: [
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+        …
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+        {
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+          type: "office"
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+          number: "646 555-4567"
+  </div>
+  <div
+    className="deletion"
+    style={null}
+  >
+        }
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      ]
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+      … (2)
+  </div>
+  <div
+    className="unchanged"
+    style={null}
+  >
+    }
+  </div>
+</div>
+`;
+
 exports[`<JsonDiffComponent /> it should render correctly (array vs array) 1`] = `
 <div
   className="diff"

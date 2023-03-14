@@ -53,6 +53,32 @@ const runSimpleSnapshotTest = (jsonA: JsonValue, jsonB: JsonValue) => {
   runSnapshotTest(jsonA, jsonB, {});
 };
 
+// A copy-paste of example from this page: https://en.wikipedia.org/wiki/JSON
+const wikipediaJsonExample = {
+  firstName: 'John',
+  lastName: 'Smith',
+  isAlive: true,
+  age: 27,
+  address: {
+    streetAddress: '21 2nd Street',
+    city: 'New York',
+    state: 'NY',
+    postalCode: '10021-3100',
+  },
+  phoneNumbers: [
+    {
+      type: 'home',
+      number: '212 555-1234',
+    },
+    {
+      type: 'office',
+      number: '646 555-4567',
+    },
+  ],
+  children: ['Catherine', 'Thomas', 'Trevor'],
+  spouse: null,
+};
+
 describe('<JsonDiffComponent />', () => {
   it('it should render correctly (objects vs object)', () => {
     const jsonA = {
@@ -135,5 +161,33 @@ describe('<JsonDiffComponent />', () => {
         runSnapshotTest(parsedJson, parsedJson, {}, inlineSnapshot, inlineSnapshot);
       })
     );
+  });
+
+  it('custom elisions renderer works', () => {
+    const jsonB = {
+      ...wikipediaJsonExample,
+      age: 30,
+      phoneNumbers: [
+        {
+          type: 'home',
+          number: '212 555-1234',
+        },
+      ],
+    };
+
+    const tree = renderer
+      .create(
+        <JsonDiffComponent
+          jsonA={wikipediaJsonExample}
+          jsonB={jsonB}
+          jsonDiffOptions={{
+            maxElisions: 2,
+            renderElision: (n, max) => (n < max ? [...Array(n)].map(() => '…') : `… (${n})`),
+          }}
+        />
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });
