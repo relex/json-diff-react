@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <style>
+      body {
+        background: white;
+        color: black;
+      }
+
+      .deletion {
+        color: red;
+      }
+
+      .addition {
+        color: green;
+      }
+
+      .unchanged {
+        color: gray;
+      }
+
+      .diff {
+        font-family: monospace;
+        white-space: pre;
+        border: 1px solid gray;
+        padding: 10px;
+      }
+
+      .custom-add {
+        color: violet;
+      }
+
+      .custom-rm {
+        color: lime;
+      }
+
+      .custom-unchanged {
+        color: pink;
+      }
+
+      .custom-diff {
+        font-family: monospace;
+        white-space: pre;
+        background: purple
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./json-diff-react.bundle.js"></script>
+
+    <script type="text/babel">
+      const { JsonDiffComponent } = window['json-diff-react'];
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+
+      const a = { foo: 123, bar: 456, baz: 789 };
+      const b = { foo: 123, test: 'hello', baz: 789 };
+
+      const App = () => <div>
+        <h1>JSON diff</h1>
+
+        <p>
+          A demo that shows how you can omit the “class” attribute.
+          There should be no coloring below.
+          Also no styles at all, it should look like regular text.
+        </p>
+        <JsonDiffComponent
+          jsonA={a}
+          jsonB={b}
+          styleCustomization={{
+            additionClassName: null,
+            deletionClassName: null,
+            unchangedClassName: null,
+            frameClassName: null,
+          }}
+        />
+
+        <p>There should be normal coloring below.</p>
+        <JsonDiffComponent jsonA={a} jsonB={b} />
+
+        <p>There should be alternative coloring below (“class” names are customized).</p>
+        <JsonDiffComponent
+          jsonA={a}
+          jsonB={b}
+          styleCustomization={{
+            additionClassName: "custom-add",
+            deletionClassName: "custom-rm",
+            unchangedClassName: "custom-unchanged",
+            frameClassName: "custom-diff",
+          }}
+        />
+      </div>;
+
+      root.render(<App/>);
+    </script>
+  </body>
+</html>
