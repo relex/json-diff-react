@@ -8,9 +8,12 @@ This is a fork of [json-diff] with all of the dependencies towards Node.js core 
 Code from [json-diff] can be found under `src/JsonDiff/Internal` and it’s mostly unchanged — expect
 for the `colorize` module which now returns a JSX element instead of a string.
 
-Here is a screenshot of the [interactive demo](examples/example-07.html):
+See the [interactive live demo](https://relex.github.io/json-diff-react/examples/example-07.html).
+Also see the [source of that demo](examples/example-07.html).
 
 ![A screenshot of the React component example](screenshot.png)
+
+Also see https://relex.github.io/json-diff-react/ for other examples.
 
 ## Simple example
 
