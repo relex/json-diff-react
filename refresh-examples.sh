@@ -33,3 +33,6 @@ mkdir -p examples
 		"$INSIDE_DIR_WRAP/examples/*.html" \
 		"$INSIDE_DIR_WRAP/examples/*.bundle.js"
 )
+
+cp -f examples/example-06.html index.html
+cp -f examples/json-diff-react.bundle.js .
