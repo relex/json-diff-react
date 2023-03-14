@@ -184,7 +184,7 @@ export interface DiffOptions {
 All of the fields are optional. Consult the original [json-diff] library to
 learn more about how the options impact the output.
 
-Most of this type came from
+Most of the `DiffOptions` type came from
 https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/json-diff/index.d.ts.
 
 N.B. I added the `excludeKeys` attribute to the `DiffOptions` imported from
