@@ -146,9 +146,25 @@
 
         <p>
           The same demo but with shrinked elisions
-          (<code>{'jsonDiffOptions={{ maxElisions: 1 }}'}</code>).
+          (<code>{'jsonDiffOptions={{ maxElisions: 2 }}'}</code>).
         </p>
-        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ maxElisions: 1 }} />
+        <JsonDiffComponent jsonA={a} jsonB={b} jsonDiffOptions={{ maxElisions: 2 }} />
+
+        <p>
+          The same demo but also with a custom elision renderer
+          (<code>{`jsonDiffOptions={{
+            maxElisions: 2,
+            ${"renderElision: (n, max) => (n < max) ? [...Array(n)].map(() => '…') : `… (${n})`"}
+          `}}'}</code>).
+        </p>
+        <JsonDiffComponent
+          jsonA={a}
+          jsonB={b}
+          jsonDiffOptions={{
+            maxElisions: 2,
+            renderElision: (n, max) => (n < max) ? [...Array(n)].map(() => '…') : `… (${n})`
+          }}
+        />
 
         <p>
           No elisions for objects (original behavior of <b>json-diff</b> library,{' '}
