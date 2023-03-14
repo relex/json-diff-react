@@ -50,7 +50,7 @@ readarray -t all_examples_a <<< "$all_examples" # Read as array
 declare -A all_dependencies
 
 # Extract and download dependencies locally.
-# CORS limitations of GitHub Actions do not allow to use them by direct URLs.
+# CORS limitations of GitHub Pages do not allow to use them by direct URLs.
 for example_file_path in "${all_examples_a[@]}"; do
 	dependencies=$(<"$example_file_path" grep -oP 'http.*/unpkg.com/.*\.js')
 	readarray -t dependencies_a <<< "$dependencies"
