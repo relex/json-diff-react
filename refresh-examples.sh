@@ -25,7 +25,7 @@ SRC_FILE=${SRC_FILE:-src.tar.gz}
 INSIDE_DIR_WRAP=${INSIDE_DIR:-json-diff-react-$SRC_BRANCH}
 
 # Fetch latest branch archive
-# curl -L --fail -- "https://github.com/relex/json-diff-react/archive/$SRC_BRANCH.tar.gz" > "$SRC_FILE"
+curl -L --fail -- "https://github.com/relex/json-diff-react/archive/$SRC_BRANCH.tar.gz" > "$SRC_FILE"
 
 mkdir -p examples
 
