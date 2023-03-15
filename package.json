@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "Joonas Laukka <joonas.laukka@relexsolutions.com>",
   "description": "A React.js component based on the json-diff package",
+  "homepage": "https://github.com/relex/json-diff-react",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
