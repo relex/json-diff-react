@@ -10,7 +10,6 @@
   "files": [
     "lib",
     "README.md",
-    "CONTRIBUTING.md",
     "LICENSE-MIT"
   ],
   "dependencies": {
