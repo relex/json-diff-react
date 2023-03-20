@@ -10,7 +10,15 @@
   "files": [
     "lib",
     "README.md",
+    "screenshot.png",
     "LICENSE-MIT"
+  ],
+  "keywords": [
+    "react",
+    "json",
+    "diff",
+    "compare",
+    "typescript"
   ],
   "dependencies": {
     "@ewoudenberg/difflib": "^0.1.0",
