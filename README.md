@@ -11,7 +11,7 @@ for the `colorize` module which now returns a JSX element instead of a string.
 See the [interactive live demo](https://relex.github.io/json-diff-react/examples/example-07.html).
 Also see the [source of that demo](examples/example-07.html).
 
-![A screenshot of the React component example](screenshot.png)
+![A screenshot of the React component example](https://relex.github.io/json-diff-react/pictures/screenshot.png)
 
 Also see https://relex.github.io/json-diff-react/ for other examples.
 
