@@ -1,6 +1,6 @@
 {
   "name": "json-diff-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Joonas Laukka <joonas.laukka@relexsolutions.com>",
   "description": "A React.js component based on the json-diff package",
   "homepage": "https://github.com/relex/json-diff-react",
